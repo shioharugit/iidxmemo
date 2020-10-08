@@ -13,68 +13,70 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('App\Http\Controllers')->group(function () {
+// ROOT
+Route::get('/', function () {
+    return redirect()->route('user.login');
+});
 
-    // ユーザー
-    Route::namespace('User')->name('user.')->group(function () {
+// ユーザー
+Route::namespace('User')->name('user.')->group(function () {
 
-        Route::namespace('Auth')->group(function () {
-            // ログイン
-            Route::get('login', 'LoginController@showLoginForm')->name('login');
-            Route::post('login', 'LoginController@login')->name('login');
+    Route::namespace('Auth')->group(function () {
+        // ログイン
+        Route::get('login', 'LoginController@showLoginForm')->name('login');
+        Route::post('login', 'LoginController@login')->name('login');
 
-            // ログアウト
-            Route::get('logout', 'LoginController@logout')->name('logout');
+        // ログアウト
+        Route::get('logout', 'LoginController@logout')->name('logout');
 
-            // リマインダ
-            Route::get('password', 'ForgotPasswordController@showLinkRequestForm')->name('password');
-            Route::post('password', 'ForgotPasswordController@sendResetLinkEmail')->name('password');
+        // リマインダ
+        Route::get('password', 'ForgotPasswordController@showLinkRequestForm')->name('password');
+        Route::post('password', 'ForgotPasswordController@sendResetLinkEmail')->name('password');
 
-            // パスワード再設定メール送信
-            Route::post('password/reset', 'ResetPasswordController@reset');
+        // パスワード再設定メール送信
+        Route::post('password/reset', 'ResetPasswordController@reset');
 
-            // パスワード再設定
-            Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
-            Route::post('password/reset', 'ResetPasswordController@reset')->name('password.update');
-        });
-
-        // ログイン認証後
-        Route::middleware('auth:user')->group(function () {
-            // TOPページ
-            Route::resource('home', 'HomeController', ['only' => 'index']);
-        });
-
+        // パスワード再設定
+        Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
+        Route::post('password/reset', 'ResetPasswordController@reset')->name('password.update');
     });
 
-    // 管理
-    Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
-
-        Route::namespace('Auth')->group(function () {
-            // ログイン
-            Route::get('login', 'LoginController@showLoginForm')->name('login');
-            Route::post('login', 'LoginController@login')->name('login');
-
-            // ログアウト
-            Route::get('logout', 'LoginController@logout')->name('logout');
-
-            // リマインダ
-            Route::get('password', 'ForgotPasswordController@showLinkRequestForm')->name('password');
-            Route::post('password', 'ForgotPasswordController@sendResetLinkEmail')->name('password');
-
-            // パスワード再設定メール送信
-            Route::post('password/reset', 'ResetPasswordController@reset');
-
-            // パスワード再設定
-            Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
-            Route::post('password/reset', 'ResetPasswordController@reset')->name('password.update');
-        });
-
-        // ログイン認証後
-        Route::middleware('auth:admin')->group(function () {
-            // TOPページ
-            Route::resource('home', 'HomeController', ['only' => 'index']);
-        });
-
+    // ログイン認証後
+    Route::middleware('auth:user')->group(function () {
+        // TOPページ
+        Route::resource('home', 'HomeController', ['only' => 'index']);
     });
 
 });
+
+// 管理
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
+
+    Route::namespace('Auth')->group(function () {
+        // ログイン
+        Route::get('login', 'LoginController@showLoginForm')->name('login');
+        Route::post('login', 'LoginController@login')->name('login');
+
+        // ログアウト
+        Route::get('logout', 'LoginController@logout')->name('logout');
+
+        // リマインダ
+        Route::get('password', 'ForgotPasswordController@showLinkRequestForm')->name('password');
+        Route::post('password', 'ForgotPasswordController@sendResetLinkEmail')->name('password');
+
+        // パスワード再設定メール送信
+        Route::post('password/reset', 'ResetPasswordController@reset');
+
+        // パスワード再設定
+        Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
+        Route::post('password/reset', 'ResetPasswordController@reset')->name('password.update');
+    });
+
+    // ログイン認証後
+    Route::middleware('auth:admin')->group(function () {
+        // TOPページ
+        Route::resource('home', 'HomeController', ['only' => 'index']);
+    });
+
+});
+
