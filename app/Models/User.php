@@ -7,6 +7,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 class User extends Authenticatable
 {
@@ -18,9 +21,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'login_id',
         'email',
+        'email_verified_at',
+        'email_verify_token',
         'password',
+        'remember_token',
+        'deleted_at',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -45,5 +54,52 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new UserPasswordResetNotification($token));
+    }
+
+    /**
+     * ユーザー登録処理
+     * @param $data
+     * @return mixed
+     */
+    public function createUser($data)
+    {
+        $result = [];
+        DB::beginTransaction();
+        try {
+            $result = User::insert($data);
+        } catch (Exception $e) {
+            DB::rollback();
+            Log::error('ユーザー登録中に例外が発生しました:' . $e->getMessage());
+            abort(500);
+        }
+        DB::commit();
+        return $result;
+    }
+
+    /**
+     * ユーザー更新処理
+     * @param $data
+     * @param $where
+     * @return mixed
+     */
+    public function updateUser($data, $where)
+    {
+        $result = [];
+        DB::beginTransaction();
+        try {
+            $query = User::query();
+
+            if (!empty($where['id'])) {
+                $query->where('id', '=', $where['id']);
+            }
+
+            $result = $query->update($data);
+        } catch (Exception $e) {
+            DB::rollback();
+            Log::error('ユーザー更新中に例外が発生しました:' . $e->getMessage());
+            abort(500);
+        }
+        DB::commit();
+        return $result;
     }
 }

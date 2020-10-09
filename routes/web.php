@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 // ユーザー
-Route::namespace('User')->name('user.')->group(function () {
+Route::namespace('User')->prefix('user')->name('user.')->group(function () {
 
     Route::namespace('Auth')->group(function () {
         // ログイン
@@ -40,6 +40,14 @@ Route::namespace('User')->name('user.')->group(function () {
         Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
         Route::post('password/reset', 'ResetPasswordController@reset')->name('password.update');
     });
+
+    // ユーザー仮登録
+    Route::get('preregister', 'UserController@preregister')->name('preregister');
+    Route::post('send', 'UserController@send')->name('send');
+
+    // ユーザー登録
+    Route::get('create/{email_verify_token}', 'UserController@create')->name('create');
+    Route::post('store/{email_verify_token}', 'UserController@store')->name('store');
 
     // ログイン認証後
     Route::middleware('auth:user')->group(function () {

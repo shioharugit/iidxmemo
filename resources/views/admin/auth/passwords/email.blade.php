@@ -1,5 +1,5 @@
 @extends('admin.layouts.index')
-@section('title', 'ログインID通知／パスワード再設定メール送信')
+@section('title', 'パスワード再設定メール送信')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">

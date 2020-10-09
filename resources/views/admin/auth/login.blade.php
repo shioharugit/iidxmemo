@@ -42,7 +42,7 @@
                             <div class="form-group row text-center">
                                 <div class="col-md-12">
                                     <a class="btn btn-link" href="{{ route('admin.password') }}">
-                                        ログインID・パスワードをお忘れの方はこちら
+                                        パスワードをお忘れの方はこちら
                                     </a>
                                 </div>
                             </div>

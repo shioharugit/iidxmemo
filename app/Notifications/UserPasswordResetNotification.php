@@ -11,7 +11,7 @@ class UserPasswordResetNotification extends ResetPasswordNotification
         return (new MailMessage)
             ->subject('【IIDXMEMO】パスワード再設定')
             ->view('user.email.password_reset', [
-                'url' => url('password/reset', $this->token).'?email='.$notifiable->email,
+                'url' => url('user/password/reset', $this->token).'?email='.$notifiable->email,
                 'login_id' => $notifiable->login_id,
             ]);
     }

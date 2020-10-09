@@ -16,11 +16,11 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('login_id', 20)->index()->comment('ログインID');
+            $table->string('login_id', 20)->nullable()->index()->comment('ログインID');
             $table->string('email', 255)->comment('メールアドレス');
             $table->timestamp('email_verified_at')->nullable()->comment('メール認証日');
-            $table->string('email_verified_token')->nullable()->comment('メール認証用トークン');
-            $table->string('password', 255)->comment('パスワード');
+            $table->string('email_verify_token')->nullable()->comment('メール認証用トークン');
+            $table->string('password', 255)->nullable()->comment('パスワード');
             $table->rememberToken()->comment('パスワードリマインダー用トークン');
             $table->timestamp('deleted_at')->nullable()->comment('削除日');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('登録日');
