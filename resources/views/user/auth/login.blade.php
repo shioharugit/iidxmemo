@@ -5,6 +5,13 @@
         <div class="card-header">ログイン</div>
 
         <div class="card-body">
+            @if (!empty(session('messages')))
+                <div class="alert alert-success" role="alert">
+                    @foreach (session('messages') as $message)
+                        {{ $message }}<br>
+                    @endforeach
+                </div>
+            @endif
             <form method="POST" action="{{ route('user.login') }}">
                 @csrf
 

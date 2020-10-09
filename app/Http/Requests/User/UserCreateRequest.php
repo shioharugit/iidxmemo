@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
-use App\Rules\ExistEmail;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserPreregisterRequest extends FormRequest
+class UserCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +24,8 @@ class UserPreregisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => [
-                'required',
-                'email',
-                'confirmed',
-                'max:255',
-                new ExistEmail($this->request->all()),
-            ],
+            'login_id' => 'required|regex:/^[0-9a-zA-Z_@-]+$/|min:6|max:20|unique:users,login_id',
+            'password' => 'required|regex:/^[0-9a-zA-Z_@-]+$/|confirmed|min:6|max:20',
         ];
     }
 }

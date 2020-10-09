@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable()->comment('メール認証日');
             $table->string('email_verify_token')->nullable()->comment('メール認証用トークン');
             $table->string('password', 255)->nullable()->comment('パスワード');
-            $table->rememberToken()->comment('パスワードリマインダー用トークン');
+            $table->rememberToken()->comment('ログイン次回から入力を省略用トークン');
             $table->timestamp('deleted_at')->nullable()->comment('削除日');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('登録日');
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'))->comment('更新日');

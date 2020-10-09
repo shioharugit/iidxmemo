@@ -49,4 +49,42 @@ class UserService
         }
         DB::commit();
     }
+
+    /**
+     * ユーザー登録の仮登録ユーザー取得
+     * @param $email_verify_token
+     * @return mixed
+     */
+    public function getPreregisterUser($email_verify_token)
+    {
+        $params = [
+            'deleted_at_is_null' => true,
+            'email_verified_at_is_null' => true,
+            'email_verify_token' => $email_verify_token,
+        ];
+        $users = $this->user->getUser($params);
+
+        return $users->first();
+    }
+
+    /**
+     * ユーザー登録処理
+     * (仮登録中のユーザーを本登録する)
+     * @param $request
+     * @param $user
+     * @return mixed
+     */
+    public function createUser($request, $user)
+    {
+        $data = [
+            'login_id' => $request->login_id,
+            'password' => Hash::make($request->password),
+            'email_verified_at' => date(config('const.DEFAULT_DATE_FORMAT')),
+            'email_verify_token' => null,
+        ];
+        $where = [
+            'id' => $user->id,
+        ];
+        $this->user->updateUser($data, $where);
+    }
 }

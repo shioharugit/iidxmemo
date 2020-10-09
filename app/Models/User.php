@@ -57,6 +57,40 @@ class User extends Authenticatable
     }
 
     /**
+     * ユーザーを取得する
+     * @param $params
+     * @return mixed
+     */
+    public function getUser($params)
+    {
+        $query = User::select('*');
+
+        if (!empty($params['id'])) {
+            $query->where('id', '=', $params['id']);
+        }
+
+        if (!empty($params['deleted_at_is_null'])) {
+            $query->whereNull('deleted_at');
+        }
+
+        if (!empty($params['email_verified_at_is_null'])) {
+            $query->whereNull('email_verified_at');
+        }
+
+        if (!empty($params['email_verify_token'])) {
+            $query->where('email_verify_token', '=', $params['email_verify_token']);
+        }
+
+        if (!empty($params['order_by']['column']) && !empty($params['order_by']['sort'])) {
+            $query->orderBy($params['order_by']['column'], $params['order_by']['sort']);
+        } else {
+            $query->orderBy('id', 'DESC');
+        }
+
+        return $query->paginate(config('const.USER_DISPLAY_LIMIT'));
+    }
+
+    /**
      * ユーザー登録処理
      * @param $data
      * @return mixed

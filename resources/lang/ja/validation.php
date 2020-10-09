@@ -129,8 +129,11 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'login_id' => [
+            'regex' => 'ログインIDには半角英数字記号(_-@)のみ使用できます。',
+        ],
+        'password' => [
+            'regex' => 'パスワードには半角英数字記号(_-@)のみ使用できます。',
         ],
     ],
 
