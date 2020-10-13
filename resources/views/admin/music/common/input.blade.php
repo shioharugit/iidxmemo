@@ -170,6 +170,9 @@
 
                 <button type="button" class="btn btn-primary m-2 w-150px disabled_button" onclick="submitInputForm()">{{ $type === 'create' ? '登録' : '更新' }}</button>
                 <a href="{{route('admin.music.index')}}" class="btn btn-light m-2 w-150px">戻る</a>
+                @if ($type === 'edit')
+                    <button type="button" class="btn btn-danger m-2 w-150px disabled_button" onclick="submitDeleteForm()">削除</button>
+                @endif
             </form>
         </div>
     </div>
@@ -185,4 +188,15 @@
             return false;
         }
     }
+    @if ($type === 'edit')
+        function submitDeleteForm() {
+            if (confirm('楽曲を削除しますか？')) {
+                $('.disabled_button').prop('disabled', true);
+                $('#input_form').attr('action', '{{route('admin.music.destroy', $music->id)}}');
+                $('#input_form').submit();
+            } else {
+                return false;
+            }
+        }
+    @endif
 </script>

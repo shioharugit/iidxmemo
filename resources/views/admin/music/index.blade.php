@@ -10,6 +10,11 @@
         <h5 class="card-header">検索条件</h5>
         <div class="card-body">
             <div class="mb-3 collapse show">
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <form action="{{ route('admin.music.index') }}" method="GET">
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -56,12 +61,6 @@
     <div class="card mt-3">
         <h5 class="card-header">検索結果</h5>
         <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
-
             <table class="table table-bordered table-hover">
                 <thead class="thead-light">
                 <tr>

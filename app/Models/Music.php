@@ -44,6 +44,12 @@ class Music extends Model
             $query->whereNull('deleted_at');
         }
 
+        if (!empty($params['order_by']['column']) && !empty($params['order_by']['sort'])) {
+            $query->orderBy($params['order_by']['column'], $params['order_by']['sort']);
+        } else {
+            $query->orderBy('id', 'DESC');
+        }
+
         return $query->paginate(config('const.MUSIC_DISPLAY_LIMIT'));
     }
 

@@ -109,4 +109,20 @@ class MusicService
 
         return $this->music->updateMusic($data, $where);
     }
+
+    /**
+     * 楽曲削除処理
+     * @param $music_id
+     * @return mixed
+     */
+    public function deleteMusic($music_id)
+    {
+        $data = [
+            'deleted_at' => date(config('const.DEFAULT_DATE_FORMAT'))
+        ];
+        $where = [
+            'id' => $music_id,
+        ];
+        return $this->music->updateMusic($data, $where);
+    }
 }

@@ -84,4 +84,20 @@ class MusicController extends Controller
         return redirect()->route('admin.music.edit', $music_id);
     }
 
+    /**
+     * 楽曲削除
+     * @param $music_id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function destroy($music_id)
+    {
+        $music = $this->music->getEditMusic($music_id);
+        if (empty($music)) {
+            return redirect()->route('admin.music.index');
+        }
+        $this->music->deleteMusic($music_id);
+        session()->flash('status', '楽曲を削除しました。');
+
+        return redirect()->route('admin.music.index');
+    }
 }
