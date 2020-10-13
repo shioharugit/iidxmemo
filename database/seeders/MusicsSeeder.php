@@ -19,7 +19,11 @@ class MusicsSeeder extends Seeder
             [
                 [
                     'id' => 1,
-                    'name' => 'A',
+                    'version' => '7',
+                    'title' => 'A',
+                    'genre' => 'RENAISSANCE',
+                    'artist' => 'D.J.Amuro',
+                    'bpm' => '93-191',
                     'popular_name' => 'エース',
                     'sp_beginner' => null,
                     'sp_normal' => 6,
@@ -33,7 +37,11 @@ class MusicsSeeder extends Seeder
                 ],
                 [
                     'id' => 2,
-                    'name' => 'A Tale Hidden In The Abyss',
+                    'version' => '26',
+                    'title' => 'A Tale Hidden In The Abyss',
+                    'genre' => 'COMMENT OUT',
+                    'artist' => 'BEMANI Sound Team "person09"',
+                    'bpm' => '216',
                     'popular_name' => null,
                     'sp_beginner' => null,
                     'sp_normal' => 6,
@@ -47,7 +55,11 @@ class MusicsSeeder extends Seeder
                 ],
                 [
                     'id' => 3,
-                    'name' => 'AA',
+                    'version' => '11',
+                    'title' => 'AA',
+                    'genre' => 'RENAISSANCE',
+                    'artist' => 'D.J.Amuro',
+                    'bpm' => '154',
                     'popular_name' => 'ダブルエース',
                     'sp_beginner' => null,
                     'sp_normal' => 5,

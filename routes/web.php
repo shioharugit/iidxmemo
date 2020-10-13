@@ -51,8 +51,10 @@ Route::namespace('User')->prefix('user')->name('user.')->group(function () {
 
     // ログイン認証後
     Route::middleware('auth:user')->group(function () {
-        // TOPページ
-        Route::resource('home', 'HomeController', ['only' => 'index']);
+        // メモ一覧
+        Route::prefix('memo')->name('memo.')->group(function () {
+            Route::get('index', 'MemoController@preregister')->name('index');
+        });
     });
 
 });
@@ -82,8 +84,22 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
     // ログイン認証後
     Route::middleware('auth:admin')->group(function () {
-        // TOPページ
-        Route::resource('home', 'HomeController', ['only' => 'index']);
+        // 楽曲
+        Route::prefix('music')->name('music.')->group(function () {
+            // 一覧
+            Route::get('index', 'MusicController@index')->name('index');
+
+            // 登録
+            Route::get('create', 'MusicController@create')->name('create');
+            Route::post('store', 'MusicController@store')->name('store');
+
+            // 更新
+            Route::get('edit/{id}', 'MusicController@edit')->name('edit');
+            Route::post('update/{id}', 'MusicController@update')->name('update');
+
+            // 削除
+            Route::post('destroy/{id}', 'MusicController@destroy')->name('destroy');
+        });
     });
 
 });

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class UserMusicsSeeder extends Seeder
+class MemosSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,8 @@ class UserMusicsSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user_musics')->truncate();
-        DB::table('user_musics')->insert(
+        DB::table('memos')->truncate();
+        DB::table('memos')->insert(
             [
                 [
                     'user_id' => 1,
