@@ -100,6 +100,23 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
             // 削除
             Route::post('destroy/{id}', 'MusicController@destroy')->name('destroy');
         });
+
+        // ユーザー
+        Route::prefix('user')->name('user.')->group(function () {
+            // 一覧
+            Route::get('index', 'UserController@index')->name('index');
+
+            // 登録
+            Route::get('create', 'UserController@create')->name('create');
+            Route::post('store', 'UserController@store')->name('store');
+
+            // 更新
+            Route::get('edit/{id}', 'UserController@edit')->name('edit');
+            Route::post('update/{id}', 'UserController@update')->name('update');
+
+            // 削除
+            Route::post('destroy/{id}', 'UserController@destroy')->name('destroy');
+        });
     });
 
 });

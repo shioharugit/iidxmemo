@@ -69,6 +69,14 @@ class User extends Authenticatable
             $query->where('id', '=', $params['id']);
         }
 
+        if (!empty($params['login_id'])) {
+            $query->where('login_id', 'LIKE', '%' . $params['login_id'] . '%');
+        }
+
+        if (!empty($params['email'])) {
+            $query->where('email', 'LIKE', '%' . $params['email'] . '%');
+        }
+
         if (!empty($params['deleted_at_is_null'])) {
             $query->whereNull('deleted_at');
         }

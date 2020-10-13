@@ -1,7 +1,7 @@
 @if ($type === 'create')
-    @php $action_url = route('user.store', $email_verify_token); @endphp
+    @php $action_url = route('user.store', $email_verify_token ?? ''); @endphp
 @else
-    @php $action_url = route('user.sub_user.update', $sub_user->danka_user_id); @endphp
+    @php $action_url = route('user.update', $user->id ?? ''); @endphp
 @endif
 @if (!empty($invalid_message))
     <div class="card">
@@ -44,7 +44,7 @@
                                    id="login_id"
                                    class="form-control zen2han @error('login_id') is-invalid @enderror"
                                    placeholder="半角英数字記号(_-@)6文字以上20文字以内で入力してください。"
-                                   value="{{ old('login_id') ? old('login_id') : $sub_user->login_id ?? '' }}"
+                                   value="{{ old('login_id') ? old('login_id') : $user->login_id ?? '' }}"
                                    maxlength="20">
                             @if(!empty($errors->first('login_id')))
                                 <span class="text-danger"><strong>{{$errors->first('login_id')}}</strong></span>
