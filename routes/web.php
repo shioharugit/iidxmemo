@@ -53,8 +53,15 @@ Route::namespace('User')->prefix('user')->name('user.')->group(function () {
     Route::middleware('auth:user')->group(function () {
         // メモ一覧
         Route::prefix('memo')->name('memo.')->group(function () {
-            Route::get('index', 'MemoController@preregister')->name('index');
+            Route::get('index', 'MemoController@index')->name('index');
         });
+
+        // 更新
+        Route::get('edit', 'UserController@edit')->name('edit');
+        Route::post('update', 'UserController@update')->name('update');
+
+        // 退会
+        Route::post('destroy', 'UserController@destroy')->name('destroy');
     });
 
 });

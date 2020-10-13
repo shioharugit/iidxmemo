@@ -1,7 +1,7 @@
 @if ($type === 'create')
     @php $action_url = route('user.store', $email_verify_token ?? ''); @endphp
 @else
-    @php $action_url = route('user.update', $user->id ?? ''); @endphp
+    @php $action_url = route('user.update'); @endphp
 @endif
 @if (!empty($invalid_message))
     <div class="card">
@@ -15,15 +15,19 @@
         </div>
     </div>
 @else
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('user.memo.index') }}">メモ一覧</a></li>
+            <li class="breadcrumb-item active" aria-current="page">ユーザー更新</li>
+        </ol>
+    </nav>
     <div class="card">
         <h5 class="card-header">{{$title}}</h5>
         <div class="card-body">
             <div class="mb-3 collapse show">
-                @if (!empty(session('messages')))
+                @if (session('status'))
                     <div class="alert alert-success" role="alert">
-                        @foreach (session('messages') as $message)
-                            {{ $message }}<br>
-                        @endforeach
+                        {{ session('status') }}
                     </div>
                 @endif
                 <form action="" method="POST" id="input_form">
@@ -85,14 +89,17 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-primary m-2 w-150px disabled_button" onclick="submitInputForm()">{{ $type === 'create' ? '登録' : '修正' }}</button>
+                    <button type="button" class="btn btn-primary m-2 w-150px disabled_button" onclick="submitInputForm()">{{ $type === 'create' ? '登録' : '更新' }}</button>
+                    @if ($type === 'edit')
+                        <button type="button" class="btn btn-danger m-2 w-150px disabled_button" onclick="submitDeleteForm()">退会</button>
+                    @endif
                 </form>
             </div>
         </div>
     </div>
     <script>
         function submitInputForm() {
-            var confirm_type = '{{ $type === 'create' ? '登録' : '修正' }}';
+            var confirm_type = '{{ $type === 'create' ? '登録' : '更新' }}';
             if (confirm('こちらの内容で'+confirm_type+'します。よろしいですか？')) {
                 $('.disabled_button').prop('disabled', true);
                 $('#input_form').attr('action', '{{ $action_url }}');
@@ -101,5 +108,20 @@
                 return false;
             }
         }
+        @if ($type === 'edit')
+        function submitDeleteForm() {
+            if (confirm("ユーザーを削除し、退会しますか？\n※退会した場合、今までのメモが削除されログインができなくなります。")) {
+                if (confirm("退会します。\n退会処理を進める場合OKを押してください。")) {
+                    $('.disabled_button').prop('disabled', true);
+                    $('#input_form').attr('action', '{{route('user.destroy', $user->id)}}');
+                    $('#input_form').submit();
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        @endif
     </script>
 @endif

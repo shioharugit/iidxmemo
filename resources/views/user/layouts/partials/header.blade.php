@@ -7,19 +7,14 @@
         </button>
         <div class="navbar-collapse collapse" id="Navbar" style="">
             <ul class="navbar-nav mr-auto">
-                <?php /*
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('user.list') }}">List</a>
-                        @can('admin-higher')
-                            <a class="dropdown-item" href="{{ route('user.register.index') }}">Register</a>
-                        @endcan
-                    </div>
-                </li>
- */ ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.logout') }}">ログアウト</a>
+                    <a class="nav-link" href="{{ route('user.memo.index') }}" >メモ一覧</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('user.edit') }}" >ユーザー更新</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);" onclick="if (confirm('ログアウトしますか?')) {location.href = '{{ route('user.logout') }}'; }return false;">ログアウト</a>
                 </li>
             </ul>
         </div>

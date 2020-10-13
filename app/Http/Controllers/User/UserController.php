@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserPreregisterRequest;
 use App\Http\Requests\User\UserCreateRequest;
+use App\Http\Requests\User\UserEditRequest;
 use App\Services\User\UserService;
 
 class UserController extends Controller
@@ -74,5 +75,55 @@ class UserController extends Controller
         session()->flash('messages', ['ユーザーの登録が完了しました。ログインしてサービスをご利用ください。']);
 
         return redirect()->route('user.login');
+    }
+
+    /**
+     * ユーザー更新
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function edit()
+    {
+        $user = $this->user->getEditUser();
+        if (empty($user)) {
+            return redirect()->route('user.memo.index');
+        }
+
+        return view('user.user.edit', ['user' => $user,]);
+    }
+
+    /**
+     * ユーザー更新処理
+     * @param UserEditRequest $request
+     * @param $user_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(UserEditRequest $request)
+    {
+        $user = $this->user->getEditUser();
+        if (empty($user)) {
+            return redirect()->route('user.memo.index');
+        }
+
+        $this->user->updateUser($request);
+        session()->flash('status', 'ユーザーを更新しました。');
+
+        return redirect()->route('user.edit');
+    }
+
+    /**
+     * ユーザー削除
+     * @param $user_id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function destroy($user_id)
+    {
+        $user = $this->user->getEditUser($user_id);
+        if (empty($user)) {
+            return redirect()->route('admin.user.index');
+        }
+        $this->user->deleteUser($user_id);
+        session()->flash('status', 'ユーザーを削除しました。');
+
+        return redirect()->route('admin.user.index');
     }
 }

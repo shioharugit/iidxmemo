@@ -87,4 +87,57 @@ class UserService
         ];
         $this->user->updateUser($data, $where);
     }
+
+    /**
+     * ユーザー更新のユーザー取得
+     * @return mixed
+     */
+    public function getEditUser()
+    {
+        $params = [
+            'id' => Auth::user()->id,
+            'deleted_at_is_null' => true,
+        ];
+        $users = $this->user->getUser($params);
+
+        return $users->first();
+    }
+
+    /**
+     * ユーザー更新処理
+     * @param $request
+     * @return mixed
+     */
+    public function updateUser($request)
+    {
+        $data = [
+            'login_id' => $request->login_id,
+        ];
+
+        if (!empty($request->password)) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $where = [
+            'id' => Auth::user()->id,
+        ];
+
+        return $this->user->updateUser($data, $where);
+    }
+
+    /**
+     * ユーザー削除処理
+     * @param $user_id
+     * @return mixed
+     */
+    public function deleteUser($user_id)
+    {
+        $data = [
+            'deleted_at' => date(config('const.DEFAULT_DATE_FORMAT'))
+        ];
+        $where = [
+            'id' => $user_id,
+        ];
+        return $this->user->updateUser($data, $where);
+    }
 }

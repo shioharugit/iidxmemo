@@ -26,6 +26,7 @@ class CreateAdminsTable extends Migration
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->comment('登録日');
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'))->comment('更新日');
         });
+        DB::statement('ALTER TABLE admins MODIFY login_id varchar(20) BINARY');
     }
 
     /**

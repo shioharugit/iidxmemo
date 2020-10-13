@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ExistLoginId;
 
 class UserCreateRequest extends FormRequest
 {
@@ -24,7 +25,13 @@ class UserCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'login_id' => 'required|regex:/^[0-9a-zA-Z_@-]+$/|min:6|max:20|unique:users,login_id',
+            'login_id' => [
+                'required',
+                'regex:/^[0-9a-zA-Z_@-]+$/',
+                'min:6',
+                'max:20',
+                new ExistLoginId($this->request->all()),
+            ],
             'password' => 'required|regex:/^[0-9a-zA-Z_@-]+$/|confirmed|min:6|max:20',
         ];
     }

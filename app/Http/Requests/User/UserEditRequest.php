@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\User;
 
-use App\Rules\ExistEmail;
 use App\Rules\ExistLoginId;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,13 +25,6 @@ class UserEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => [
-                'required',
-                'email',
-                'confirmed',
-                'max:255',
-                new ExistEmail($this->request->all()),
-            ],
             'login_id' => [
                 'required',
                 'regex:/^[0-9a-zA-Z_@-]+$/',

@@ -74,4 +74,17 @@ class LoginController extends Controller
     {
         return 'login_id';
     }
+
+    /**
+     * 削除ユーザーはログインできないように変更
+     * @param Request $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        $temporary = $request->only($this->username(), 'password');
+        $temporary['deleted_at'] = null;
+
+        return $temporary;
+    }
 }
