@@ -19,3 +19,21 @@
 .w-250px {
     width: 250px;
 }
+.pointer {
+    cursor: pointer;
+}
+.beginner {
+    background: #e0ffe0;
+}
+.normal {
+    background: #e8e8ff;
+}
+.hyper {
+    background: #ffffb8;
+}
+.another {
+    background: #ffe0e0;
+}
+.leggendaria {
+    background: #ffe0ff;
+}

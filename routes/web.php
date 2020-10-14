@@ -51,16 +51,22 @@ Route::namespace('User')->prefix('user')->name('user.')->group(function () {
 
     // ログイン認証後
     Route::middleware('auth:user')->group(function () {
-        // メモ一覧
+        // メモ
         Route::prefix('memo')->name('memo.')->group(function () {
+            // 一覧
             Route::get('index', 'MemoController@index')->name('index');
+
+            // Ajax メモ取得
+            Route::post('list', 'MemoController@list')->name('list');
+            // Ajax メモ更新
+            Route::post('update/{memo_id}', 'MemoController@update')->name('update');
         });
 
-        // 更新
+        // ユーザー更新
         Route::get('edit', 'UserController@edit')->name('edit');
         Route::post('update', 'UserController@update')->name('update');
 
-        // 退会
+        // ユーザー退会
         Route::post('destroy', 'UserController@destroy')->name('destroy');
     });
 
@@ -101,11 +107,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
             Route::post('store', 'MusicController@store')->name('store');
 
             // 更新
-            Route::get('edit/{id}', 'MusicController@edit')->name('edit');
-            Route::post('update/{id}', 'MusicController@update')->name('update');
+            Route::get('edit/{music_id}', 'MusicController@edit')->name('edit');
+            Route::post('update/{music_id}', 'MusicController@update')->name('update');
 
             // 削除
-            Route::post('destroy/{id}', 'MusicController@destroy')->name('destroy');
+            Route::post('destroy/{music_id}', 'MusicController@destroy')->name('destroy');
         });
 
         // ユーザー
@@ -118,11 +124,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
             Route::post('store', 'UserController@store')->name('store');
 
             // 更新
-            Route::get('edit/{id}', 'UserController@edit')->name('edit');
-            Route::post('update/{id}', 'UserController@update')->name('update');
+            Route::get('edit/{user_id}', 'UserController@edit')->name('edit');
+            Route::post('update/{user_id}', 'UserController@update')->name('update');
 
             // 削除
-            Route::post('destroy/{id}', 'UserController@destroy')->name('destroy');
+            Route::post('destroy/{user_id}', 'UserController@destroy')->name('destroy');
         });
     });
 

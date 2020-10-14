@@ -3,13 +3,7 @@
 namespace App\Services\User;
 
 use App\Models\Memo as Memo;
-use App\Mail\EmailVerification;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
-use Exception;
 
 class MemoService
 {
@@ -29,8 +23,46 @@ class MemoService
     {
         $params = [
             'user_id' => Auth::user()->id,
+            'memo_id' => $request->memo_id,
+            'deleted_at_is_null' => true,
         ];
 
         return $this->memo->getMemo($params);
+    }
+
+    /**
+     * ユーザーの更新しようとしているメモを取得する
+     * @param $memo_id
+     * @return mixed
+     */
+    public function getEditMemo($memo_id)
+    {
+        $params = [
+            'user_id' => Auth::user()->id,
+            'memo_id' => $memo_id,
+            'deleted_at_is_null' => true,
+        ];
+
+        return $this->memo->getMemo($params);
+    }
+
+    /**
+     * メモ更新処理
+     * @param $request
+     * @param $memo_id
+     * @return mixed
+     */
+    public function updateMemo($request, $memo_id)
+    {
+        $data = [
+            'memo' => $request->memo,
+        ];
+
+        $where = [
+            'id' => $memo_id,
+            'user_id' => Auth::user()->id,
+        ];
+
+        return $this->memo->updateMemo($data, $where);
     }
 }
