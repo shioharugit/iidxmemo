@@ -127,16 +127,15 @@ class UserService
 
     /**
      * ユーザー削除処理
-     * @param $user_id
      * @return mixed
      */
-    public function deleteUser($user_id)
+    public function deleteUser()
     {
         $data = [
             'deleted_at' => date(config('const.DEFAULT_DATE_FORMAT'))
         ];
         $where = [
-            'id' => $user_id,
+            'id' => Auth::user()->id,
         ];
         return $this->user->updateUser($data, $where);
     }

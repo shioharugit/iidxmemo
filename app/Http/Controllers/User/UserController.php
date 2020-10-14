@@ -111,19 +111,18 @@ class UserController extends Controller
     }
 
     /**
-     * ユーザー削除
-     * @param $user_id
+     * ユーザー退会
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function destroy($user_id)
+    public function destroy()
     {
-        $user = $this->user->getEditUser($user_id);
+        $user = $this->user->getEditUser();
         if (empty($user)) {
-            return redirect()->route('admin.user.index');
+            return redirect()->route('user.memo.index');
         }
-        $this->user->deleteUser($user_id);
+        $this->user->deleteUser();
         session()->flash('status', 'ユーザーを削除しました。');
 
-        return redirect()->route('admin.user.index');
+        return redirect()->route('user.logout');
     }
 }
