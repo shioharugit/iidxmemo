@@ -152,6 +152,8 @@
         function openSearchModal() {
             $('#search_version').val('');
             $('#search_free').val('');
+            $('#search_sp_difficulty').val('');
+            $('#search_dp_difficulty').val('');
             var html = '<tr><td>検索してください。</td></tr>';
             $('#music_list').html(html);
             $('#SearchModal').modal('show');
