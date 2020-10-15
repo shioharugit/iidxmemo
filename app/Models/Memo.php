@@ -40,7 +40,7 @@ class Memo extends Model
             'musics.dp_another',
             'musics.dp_leggendaria',
         )
-            ->leftJoin('musics', function ($join) {
+            ->join('musics', function ($join) {
                 $join->on('memos.music_id', '=', 'musics.id')
                     ->whereNull('musics.deleted_at');
             });
