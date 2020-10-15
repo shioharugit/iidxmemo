@@ -150,6 +150,7 @@
         }
 
         function openSearchModal() {
+            $('.disabled_button').prop('disabled', false);
             $('#search_version').val('');
             $('#search_free').val('');
             $('#search_sp_difficulty').val('');

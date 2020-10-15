@@ -58,12 +58,14 @@ Route::namespace('User')->prefix('user')->name('user.')->group(function () {
 
             // Ajax メモ取得
             Route::post('list', 'MemoController@list')->name('list');
+            // Ajax 楽曲検索
+            Route::post('search', 'MemoController@search')->name('search');
+            // Ajax メモ登録
+            Route::post('store/{music_id}', 'MemoController@store')->name('store');
             // Ajax メモ更新
             Route::post('update/{memo_id}', 'MemoController@update')->name('update');
             // Ajax メモ削除
             Route::post('destroy/{memo_id}', 'MemoController@destroy')->name('destroy');
-            // Ajax 楽曲検索
-            Route::post('search', 'MemoController@search')->name('search');
         });
 
         // ユーザー更新

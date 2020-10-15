@@ -41,6 +41,35 @@ class MemoController extends Controller
     }
 
     /**
+     * 楽曲検索結果をJsonで返却する
+     * @param MemoMusicSearchRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search(MemoMusicSearchRequest $request)
+    {
+        $music = $this->music->getMusic($request);
+        return response()->json($music, 200);
+    }
+
+    /**
+     * メモ登録処理
+     * @param $music_id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store($music_id)
+    {
+        $music = $this->music->getMusicByMusicId($music_id);
+        if (empty($music)) {
+            $params = ['errors' => ['楽曲が見つかりませんでした。']];
+            return response()->json($params, 404);
+        }
+        $this->memo->createMemo($music_id);
+        $params = ['messages' => 'メモを登録しました。'];
+
+        return response()->json($params, 200);
+    }
+
+    /**
      * メモ更新処理
      * @param MemoEditRequest $request
      * @param $memo_id
@@ -75,16 +104,5 @@ class MemoController extends Controller
         $params = ['messages' => 'メモを一覧から削除しました。'];
 
         return response()->json($params, 200);
-    }
-
-    /**
-     * 楽曲検索結果をJsonで返却する
-     * @param MemoMusicSearchRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function search(MemoMusicSearchRequest $request)
-    {
-        $music = $this->music->getMusic($request);
-        return response()->json($music, 200);
     }
 }

@@ -34,4 +34,19 @@ class MusicService
 
         return $this->music->getMusic($params);
     }
+
+    /**
+     * 楽曲IDと一致する楽曲を取得
+     * @param $music_id
+     * @return mixed
+     */
+    public function getMusicByMusicId($music_id)
+    {
+        $params = [
+            'id' => $music_id,
+            'deleted_at_is_null' => true,
+        ];
+
+        return $this->music->getMusic($params);
+    }
 }

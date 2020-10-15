@@ -25,9 +25,48 @@ class MemoService
             'user_id' => Auth::user()->id,
             'memo_id' => $request->memo_id,
             'deleted_at_is_null' => true,
+            'order_by' => [
+                'column' => 'memos.updated_at',
+                'sort' => 'DESC',
+            ],
         ];
 
         return $this->memo->getMemo($params);
+    }
+
+    /**
+     * メモ登録処理
+     * @param $music_id
+     * @return mixed
+     */
+    public function createMemo($music_id)
+    {
+        $params = [
+            'user_id' => Auth::user()->id,
+            'music_id' => $music_id,
+        ];
+
+        $memo = $this->memo->getMemo($params)->first();
+        if (!empty($memo)) {
+            // 過去にメモを登録している場合は復活
+            $data = [
+                'deleted_at' => null,
+            ];
+
+            $where = [
+                'id' => $memo->memo_id,
+                'user_id' => Auth::user()->id,
+                'music_id' => $music_id,
+            ];
+            return $this->memo->updateMemo($data, $where);
+        } else {
+            // 過去にメモを登録していない場合は登録
+            $data = [
+                'user_id' => Auth::user()->id,
+                'music_id' => $music_id,
+            ];
+            return $this->memo->createMemo($data);
+        }
     }
 
     /**
@@ -43,7 +82,7 @@ class MemoService
             'deleted_at_is_null' => true,
         ];
 
-        return $this->memo->getMemo($params);
+        return $this->memo->getMemo($params)->first();
     }
 
     /**

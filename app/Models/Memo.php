@@ -53,6 +53,10 @@ class Memo extends Model
             $query->where('memos.user_id', '=', $params['user_id']);
         }
 
+        if (!empty($params['music_id'])) {
+            $query->where('memos.music_id', '=', $params['music_id']);
+        }
+
         if (!empty($params['deleted_at_is_null'])) {
             $query->whereNull('memos.deleted_at');
         }

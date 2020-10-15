@@ -83,7 +83,6 @@
             },
         })
             .done(function(response) {
-                console.log(response);
                 //通信成功時の処理
                 var html = '';
                 $.each(response, function(index, value){
@@ -92,7 +91,7 @@
                     if ($('#registered_music_id_'+value.id).val()) {
                         html += '<td class="w-100px"><button type="button" class="btn btn-info" disabled>登録済</button></td>';
                     } else {
-                        html += '<td class="w-100px"><button type="button" class="btn btn-primary">登録</button></td>';
+                        html += '<td class="w-100px"><button type="button" id="search_music_id_'+value.id+'" class="btn btn-primary disabled_button" onclick="submitCreateForm('+value.id+');">登録</button></td>';
                     }
                     html += '</tr>';
                 });
@@ -102,6 +101,37 @@
                 }
                 $('#music_list').html(html);
 
+                $('.disabled_button').prop('disabled', false);
+            })
+            .fail(function(xhr) {
+                //通信失敗時の処理
+                var error_message = '';
+                $.each(xhr.responseJSON.errors, function(index, value){
+                    error_message = error_message + value + "\n";
+                });
+                alert(error_message);
+            })
+            .always(function(xhr, msg) {
+                //結果に関わらず実行したい処理
+            });
+    }
+
+    function submitCreateForm(music_id) {
+        $('.disabled_button').prop('disabled', true);
+        $.ajax({
+            url: '/user/memo/store/'+music_id,
+            type: 'post',
+            cache: false,
+            dataType:'json',
+            data: {
+                '_token': $('input[name="_token"]').val(),
+            },
+        })
+            .done(function(response) {
+                //通信成功時の処理
+                alert(response.messages);
+                $('#search_music_id_'+music_id).attr('class', 'btn btn-info').prop('disabled', true).text('登録済');
+                getMemo();
                 $('.disabled_button').prop('disabled', false);
             })
             .fail(function(xhr) {
