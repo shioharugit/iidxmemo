@@ -95,7 +95,11 @@ class User extends Authenticatable
             $query->orderBy('id', 'DESC');
         }
 
-        return $query->paginate(config('const.USER_DISPLAY_LIMIT'));
+        if (!empty($params['paginate'])) {
+            return $query->paginate($params['paginate']);
+        }
+
+        return $query->get();
     }
 
     /**

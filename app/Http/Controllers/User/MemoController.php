@@ -5,16 +5,19 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\MemoIndexRequest;
 use App\Http\Requests\User\MemoEditRequest;
+use App\Http\Requests\User\MemoMusicSearchRequest;
 use App\Services\User\MemoService as MemoService;
-
+use App\Services\User\MusicService as MusicService;
 
 class MemoController extends Controller
 {
     private $memo;
+    private $music;
 
     public function __construct()
     {
         $this->memo = new MemoService();
+        $this->music = new MusicService();
     }
 
     /**
@@ -34,7 +37,7 @@ class MemoController extends Controller
     public function list(MemoIndexRequest $request)
     {
         $memo = $this->memo->getMemo($request);
-        return response()->json($memo ,200);
+        return response()->json($memo, 200);
     }
 
     /**
@@ -48,12 +51,12 @@ class MemoController extends Controller
         $memo = $this->memo->getEditMemo($memo_id);
         if (empty($memo)) {
             $params = ['errors' => ['メモが見つかりませんでした。']];
-            return response()->json($params ,404);
+            return response()->json($params, 404);
         }
         $this->memo->updateMemo($request, $memo_id);
         $params = ['messages' => 'メモを更新しました。'];
 
-        return response()->json($params ,200);
+        return response()->json($params, 200);
     }
 
     /**
@@ -66,11 +69,22 @@ class MemoController extends Controller
         $memo = $this->memo->getEditMemo($memo_id);
         if (empty($memo)) {
             $params = ['errors' => ['メモが見つかりませんでした。']];
-            return response()->json($params ,404);
+            return response()->json($params, 404);
         }
         $this->memo->deleteMemo($memo_id);
         $params = ['messages' => 'メモを一覧から削除しました。'];
 
-        return response()->json($params ,200);
+        return response()->json($params, 200);
+    }
+
+    /**
+     * 楽曲検索結果をJsonで返却する
+     * @param MemoMusicSearchRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search(MemoMusicSearchRequest $request)
+    {
+        $music = $this->music->getMusic($request);
+        return response()->json($music, 200);
     }
 }

@@ -26,6 +26,7 @@ class MusicService
             'artist' => $request->artist,
             'version' => $request->version,
             'deleted_at_is_null' => true,
+            'paginate' => config('const.MUSIC_DISPLAY_LIMIT'),
         ];
 
         return $this->music->getMusic($params);

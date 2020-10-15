@@ -44,13 +44,49 @@ class Music extends Model
             $query->whereNull('deleted_at');
         }
 
+        if (!empty($params['free'])) {
+            $free = $params['free'];
+            $query = Music::where(function ($query) use ($free) {
+                $query->orWhere('title', 'LIKE', '%' . $free . '%')
+                    ->orWhere('genre', 'LIKE', '%' . $free . '%')
+                    ->orWhere('artist', 'LIKE', '%' . $free . '%')
+                    ->orWhere('popular_name', 'LIKE', '%' . $free . '%');
+            });
+        }
+
+        if (!empty($params['sp_difficulty'])) {
+            $sp_difficulty = $params['sp_difficulty'];
+            $query = Music::where(function ($query) use ($sp_difficulty) {
+                $query->orWhere('sp_beginner', '=', $sp_difficulty)
+                    ->orWhere('sp_normal', '=', $sp_difficulty)
+                    ->orWhere('sp_hyper', '=', $sp_difficulty)
+                    ->orWhere('sp_another', '=', $sp_difficulty)
+                    ->orWhere('sp_leggendaria', '=', $sp_difficulty);
+            });
+        }
+
+        if (!empty($params['dp_difficulty'])) {
+            $dp_difficulty = $params['dp_difficulty'];
+            $query = Music::where(function ($query) use ($dp_difficulty) {
+                $query->orWhere('dp_beginner', '=', $dp_difficulty)
+                    ->orWhere('dp_normal', '=', $dp_difficulty)
+                    ->orWhere('dp_hyper', '=', $dp_difficulty)
+                    ->orWhere('dp_another', '=', $dp_difficulty)
+                    ->orWhere('dp_leggendaria', '=', $dp_difficulty);
+            });
+        }
+
         if (!empty($params['order_by']['column']) && !empty($params['order_by']['sort'])) {
             $query->orderBy($params['order_by']['column'], $params['order_by']['sort']);
         } else {
             $query->orderBy('id', 'DESC');
         }
 
-        return $query->paginate(config('const.MUSIC_DISPLAY_LIMIT'));
+        if (!empty($params['paginate'])) {
+            return $query->paginate($params['paginate']);
+        }
+
+        return $query->get();
     }
 
     /**

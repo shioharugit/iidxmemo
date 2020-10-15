@@ -25,6 +25,7 @@ class UserService
             'login_id' => $request->login_id,
             'email' => $request->email,
             'deleted_at_is_null' => true,
+            'paginate' => config('const.USER_DISPLAY_LIMIT'),
         ];
 
         return $this->user->getUser($params);

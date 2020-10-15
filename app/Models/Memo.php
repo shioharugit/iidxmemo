@@ -20,7 +20,8 @@ class Memo extends Model
     {
         $query = Memo::select(
             'memos.id AS memo_id',
-            'memos.user_id AS user_id',
+            'memos.user_id',
+            'memos.music_id',
             'memos.memo',
             'musics.version',
             'musics.title',
@@ -60,6 +61,10 @@ class Memo extends Model
             $query->orderBy($params['order_by']['column'], $params['order_by']['sort']);
         } else {
             $query->orderBy('memos.id', 'DESC');
+        }
+
+        if (!empty($params['paginate'])) {
+            return $query->paginate($params['paginate']);
         }
 
         return $query->get();

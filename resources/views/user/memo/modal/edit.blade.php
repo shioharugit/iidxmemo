@@ -1,4 +1,4 @@
-<div class="modal fade" id="EditModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
+<div class="modal fade" id="EditModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="EditModal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form action="" method="POST">
@@ -67,7 +67,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitEditForm();">更新</button>
                     <button type="button" class="btn btn-danger w-125px disabled_button" id="submit_button" onclick="submitDeleteForm();">削除</button>
-                    <button type="button" class="btn btn-light w-125px disabled_button" data-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-light w-125px disabled_button" data-dismiss="modal">閉じる</button>
                 </div>
             </form>
         </div>

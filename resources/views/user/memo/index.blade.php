@@ -6,61 +6,8 @@
             <li class="breadcrumb-item active" aria-current="page">メモ一覧</li>
         </ol>
     </nav>
-    <div class="card">
-        <h5 class="card-header">検索条件</h5>
-        <div class="card-body">
-            <div class="mb-3 collapse show">
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
-                <form action="{{ route('admin.music.index') }}" method="GET">
-                    @csrf
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="title">タイトル</label>
-                            <input type="text" class="form-control" id="title" name="title" value="" maxlength="255">
-                            @if(!empty($errors->first('title')))
-                                <span class="text-danger"><strong>{{$errors->first('title')}}</strong></span>
-                            @endif
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="genre">ジャンル</label>
-                            <input type="text" class="form-control" id="genre" name="genre" value="" maxlength="255">
-                            @if(!empty($errors->first('genre')))
-                                <span class="text-danger"><strong>{{$errors->first('genre')}}</strong></span>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="artist">アーティスト</label>
-                            <input type="text" class="form-control" id="artist" name="artist"  value="" maxlength="255">
-                            @if(!empty($errors->first('artist')))
-                                <span class="text-danger"><strong>{{$errors->first('artist')}}</strong></span>
-                            @endif
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="version">バージョン</label>
-                            <select id="version" class="form-control" name="version">
-                                <option value="">選択してください</option>
-                                @foreach (config('const.VERSION') as $key => $version)
-                                    <option value="{{ $key }}">{{ $version }}</option>
-                                @endforeach
-                            </select>
-                            @if(!empty($errors->first('version')))
-                                <span class="text-danger"><strong>{{$errors->first('version')}}</strong></span>
-                            @endif
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-150px">検索</button>
-                </form>
-            </div>
-        </div>
-    </div>
     <div class="card mt-3">
-        <h5 class="card-header">メモ一覧</h5>
+        <h5 class="card-header"><button type="button" class="btn btn-primary w-150px" onclick="openSearchModal();">楽曲検索</button></h5>
         <div class="card-body">
             <div class="d-flex justify-content-center" id="loading">
                 <div class="spinner-border" role="status">
@@ -73,6 +20,7 @@
             </table>
         </div>
     </div>
+    @include('user.memo.modal.search')
     @include('user.memo.modal.edit')
     <script>
         getMemo();
@@ -93,7 +41,10 @@
                 var html = '';
                 $.each(response, function(index, value){
                     html += '<tr>';
-                    html += '<td class="pointer" onclick="getEditMemo('+value.memo_id+');">'+value.title+'</td>';
+                    html += '<td class="pointer" onclick="getEditMemo('+value.memo_id+');">';
+                    html += value.title;
+                    html += '<input type="hidden" id="registered_music_id_'+value.music_id+'" value="'+value.music_id+'">';
+                    html += '</td>';
                     html += '</tr>';
                 });
                 $('#loading').remove();
@@ -196,6 +147,14 @@
                 .always(function(xhr, msg) {
                     //結果に関わらず実行したい処理
                 });
+        }
+
+        function openSearchModal() {
+            $('#search_version').val('');
+            $('#search_free').val('');
+            var html = '<tr><td>検索してください。</td></tr>';
+            $('#music_list').html(html);
+            $('#SearchModal').modal('show');
         }
     </script>
 @endsection

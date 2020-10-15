@@ -76,9 +76,12 @@ class MemoService
         $data = [
             'deleted_at' => date(config('const.DEFAULT_DATE_FORMAT'))
         ];
+
         $where = [
             'id' => $memo_id,
+            'user_id' => Auth::user()->id,
         ];
+
         return $this->memo->updateMemo($data, $where);
     }
 }
