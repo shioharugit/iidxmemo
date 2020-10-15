@@ -65,4 +65,20 @@ class MemoService
 
         return $this->memo->updateMemo($data, $where);
     }
+
+    /**
+     * メモ削除処理
+     * @param $memo_id
+     * @return mixed
+     */
+    public function deleteMemo($memo_id)
+    {
+        $data = [
+            'deleted_at' => date(config('const.DEFAULT_DATE_FORMAT'))
+        ];
+        $where = [
+            'id' => $memo_id,
+        ];
+        return $this->memo->updateMemo($data, $where);
+    }
 }

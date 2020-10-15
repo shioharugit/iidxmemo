@@ -1,4 +1,4 @@
-<div class="modal fade" id="Modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
+<div class="modal fade" id="EditModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form action="" method="POST">
@@ -65,8 +65,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary w-125px" id="submit_button" onclick="submitEditForm();">更新</button>
-                    <button type="button" class="btn btn-light w-125px" data-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitEditForm();">更新</button>
+                    <button type="button" class="btn btn-danger w-125px disabled_button" id="submit_button" onclick="submitDeleteForm();">削除</button>
+                    <button type="button" class="btn btn-light w-125px disabled_button" data-dismiss="modal">キャンセル</button>
                 </div>
             </form>
         </div>
@@ -74,6 +75,7 @@
 </div>
 <script>
     function submitEditForm() {
+        $('.disabled_button').prop('disabled', true);
         $.ajax({
             url: '/user/memo/update/'+$('#memo_id').val(),
             type: 'post',
@@ -87,6 +89,7 @@
             .done(function(response) {
                 //通信成功時の処理
                 alert(response.messages);
+                $('.disabled_button').prop('disabled', false);
             })
             .fail(function(xhr) {
                 //通信失敗時の処理
@@ -99,5 +102,39 @@
             .always(function(xhr, msg) {
                 //結果に関わらず実行したい処理
             });
+    }
+
+    function submitDeleteForm() {
+        var alert_message = "メモを一覧から削除しますか？\n※メモを再登録したときに最後に更新した状態のメモを見ることができます。"
+        if (confirm(alert_message)) {
+            $('.disabled_button').prop('disabled', true);
+            $.ajax({
+                url: '/user/memo/destroy/'+$('#memo_id').val(),
+                type: 'post',
+                cache: false,
+                dataType:'json',
+                data: {
+                    '_token': $('input[name="_token"]').val(),
+                },
+            })
+                .done(function(response) {
+                    //通信成功時の処理
+                    alert(response.messages);
+                    getMemo();
+                })
+                .fail(function(xhr) {
+                    //通信失敗時の処理
+                    var error_message = '';
+                    $.each(xhr.responseJSON.errors, function(index, value){
+                        error_message = error_message + value + "\n";
+                    });
+                    alert(error_message);
+                })
+                .always(function(xhr, msg) {
+                    //結果に関わらず実行したい処理
+                });
+        } else {
+            return false;
+        }
     }
 </script>

@@ -90,7 +90,6 @@
             })
             .done(function(response) {
                 //通信成功時の処理
-                console.log(response);
                 var html = '';
                 $.each(response, function(index, value){
                     html += '<tr>';
@@ -102,6 +101,9 @@
                     html = '<tr><td>メモが登録されていません。</td></tr>';
                 }
                 $('#memo_list').html(html);
+
+                // メモ削除後に一覧を表示する際、Modalを閉じる
+                $('#EditModal').modal('hide');
             })
             .fail(function(xhr) {
                 //通信失敗時の処理
@@ -113,6 +115,7 @@
         }
 
         function getEditMemo(memo_id) {
+            $('.disabled_button').prop('disabled', false);
             var url = '{{ route('user.memo.list') }}';
             $.ajax({
                 url: url,
@@ -126,7 +129,6 @@
             })
                 .done(function(response) {
                     //通信成功時の処理
-                    console.log(response);
                     $('#memo').remove();
                     $('#display_memo').html('<textarea class="form-control" rows="10" id="memo" name="memo"></textarea>');
                     $.each(response, function(index, value) {
@@ -185,7 +187,7 @@
                         $('#memo_dp_leggendaria').text(value.dp_leggendaria);
                         $('#memo').text(value.memo);
                     });
-                    $('#Modal').modal('show');
+                    $('#EditModal').modal('show');
                 })
                 .fail(function(xhr) {
                     //通信失敗時の処理

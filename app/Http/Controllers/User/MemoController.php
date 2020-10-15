@@ -55,4 +55,22 @@ class MemoController extends Controller
 
         return response()->json($params ,200);
     }
+
+    /**
+     * メモ削除処理
+     * @param $memo_id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy($memo_id)
+    {
+        $memo = $this->memo->getEditMemo($memo_id);
+        if (empty($memo)) {
+            $params = ['errors' => ['メモが見つかりませんでした。']];
+            return response()->json($params ,404);
+        }
+        $this->memo->deleteMemo($memo_id);
+        $params = ['messages' => 'メモを一覧から削除しました。'];
+
+        return response()->json($params ,200);
+    }
 }

@@ -60,6 +60,8 @@ Route::namespace('User')->prefix('user')->name('user.')->group(function () {
             Route::post('list', 'MemoController@list')->name('list');
             // Ajax メモ更新
             Route::post('update/{memo_id}', 'MemoController@update')->name('update');
+            // Ajax メモ削除
+            Route::post('destroy/{memo_id}', 'MemoController@destroy')->name('destroy');
         });
 
         // ユーザー更新
