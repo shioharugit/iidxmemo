@@ -1,7 +1,7 @@
 <div class="modal fade" id="SearchModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="SearchModal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form action="" method="POST">
+            <form action="" method="POST" onsubmit="return false;">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="modal_title"></h5>
