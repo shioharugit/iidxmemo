@@ -70,7 +70,7 @@
         loading += '</div>';
         $('#music_list').html(loading);
         $.ajax({
-            url: '/user/memo/search',
+            url: '{{ route('user.memo.search') }}',
             type: 'post',
             cache: false,
             dataType:'json',
@@ -119,7 +119,7 @@
     function submitCreateForm(music_id) {
         $('.disabled_button').prop('disabled', true);
         $.ajax({
-            url: '/user/memo/store/'+music_id,
+            url: '{{ route('home') }}/user/memo/store/'+music_id,
             type: 'post',
             cache: false,
             dataType:'json',

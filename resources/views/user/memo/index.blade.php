@@ -1,5 +1,5 @@
 @extends('user.layouts.index')
-@section('title', 'メモ一覧')
+@section('title', 'メモ一覧 | IIDXMEMO')
 @section('content')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -9,6 +9,11 @@
     <div class="card mt-3">
         <h5 class="card-header"><button type="button" class="btn btn-primary w-150px" onclick="openSearchModal();">楽曲検索</button></h5>
         <div class="card-body">
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="d-flex justify-content-center" id="loading">
                 <div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>

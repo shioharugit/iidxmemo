@@ -47,12 +47,14 @@
                                    name="login_id"
                                    id="login_id"
                                    class="form-control zen2han @error('login_id') is-invalid @enderror"
-                                   placeholder="半角英数字記号(_-@)6文字以上20文字以内で入力してください。"
                                    value="{{ old('login_id') ? old('login_id') : $user->login_id ?? '' }}"
                                    maxlength="20">
                             @if(!empty($errors->first('login_id')))
-                                <span class="text-danger"><strong>{{$errors->first('login_id')}}</strong></span>
+                                <span class="text-danger"><strong>{{$errors->first('login_id')}}</strong></span><br>
                             @endif
+                            <small class="text-muted">
+                                ※半角英数字記号(_-@)6文字以上20文字以内で入力してください。
+                            </small>
                         </div>
                     </div>
 
@@ -63,14 +65,11 @@
                                    name="password"
                                    id="password"
                                    class="form-control zen2han @error('password') is-invalid @enderror"
-                                   placeholder="半角英数字記号(_-@)6文字以上20文字以内で入力してください。"
-                                   value="">
+                                   value=""
+                                   maxlength="20">
                             @if(!empty($errors->first('password')))
                                 <span class="text-danger"><strong>{{$errors->first('password')}}</strong></span><br>
                             @endif
-                            <small class="text-muted">
-                                ※他のシステムで使用しているパスワードを使用しないようにしてください。
-                            </small>
                         </div>
                     </div>
 
@@ -81,11 +80,15 @@
                                    name="password_confirmation"
                                    id="password_confirmation"
                                    class="form-control @error('password_confirmation') is-invalid @enderror"
-                                   placeholder="誤入力防止のため上記と同じものを入力してください。"
-                                   value="">
+                                   value=""
+                                   maxlength="20">
                             @if(!empty($errors->first('password_confirmation')))
-                                <span class="text-danger"><strong>{{$errors->first('password_confirmation')}}</strong></span>
+                                <span class="text-danger"><strong>{{$errors->first('password_confirmation')}}</strong></span><br>
                             @endif
+                            <small class="text-muted">
+                                ※半角英数字記号(_-@)6文字以上20文字以内で入力してください。<br>
+                                ※他のシステムで使用しているパスワードを使用しないようにしてください。
+                            </small>
                         </div>
                     </div>
 

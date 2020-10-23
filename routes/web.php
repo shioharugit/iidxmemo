@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// ROOT
-Route::get('/', function () {
-    return redirect()->route('user.login');
-});
+// HOME
+Route::get('/', 'User\HomeController@index')->name('home');
 
 // ユーザー
 Route::namespace('User')->prefix('user')->name('user.')->group(function () {

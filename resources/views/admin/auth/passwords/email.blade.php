@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <p>
                             パスワードの再設定をするためのメールを送信します。<br>
-                            特定のメールアドレスのみを受信可能にしている場合、「example.com」からのメールを受信可能とするよう設定してください。
+                            {{ config('const.EMAIL_ATTENTION') }}
                         </p>
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">

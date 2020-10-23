@@ -1,5 +1,5 @@
 @extends('user.layouts.index')
-@section('title', 'パスワード再設定')
+@section('title', 'パスワード再設定 | IIDXMEMO')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -18,7 +18,7 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" maxlength="20">
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -32,7 +32,7 @@
                                 <label for="password-confirm" class="col-md-4 col-form-label text-md-right">パスワード（確認）</label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" maxlength="20">
                                 </div>
                             </div>
 

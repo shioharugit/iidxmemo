@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" prefix="og: http://ogp.me/ns#">
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="IIDXMEMO,beatmania IIDX,メモ,楽曲検索,管理" />
     <title>@yield('title')</title>
     <meta name="description" content="beatmania IIDXのACに収録されている楽曲のメモを気軽に行えるサービスです。クリアできそうな曲、好きな曲などなど、様々な用途でメモをしたくなったときにご利用ください。" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="IIDXMEMO">
+    <meta property="og:description" content="beatmania IIDXのACに収録されている楽曲のメモを気軽に行えるサービスです。クリアできそうな曲、好きな曲などなど、様々な用途でメモをしたくなったときにご利用ください。">
+    <meta property="og:url" content="https://iidxmemo.official.jp/public/">
+    <meta property="og:site_name" content="IIDXMEMO">
+    <meta property="og:image" content="{{asset('/images/home/ogp.jpg')}}">
     <link rel="icon" href="{{asset('favicon.ico')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
     <link href="{{asset('css/common.css')}}" rel="stylesheet" media="screen">

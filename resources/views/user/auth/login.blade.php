@@ -1,6 +1,13 @@
 @extends('user.layouts.index')
-@section('title', 'ログイン')
+@section('title', 'ログイン | IIDXMEMO')
 @section('content')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">HOME</a></li>
+            <li class="breadcrumb-item active" aria-current="page">ログイン</li>
+        </ol>
+    </nav>
+
     <div class="card">
         <div class="card-header">ログイン</div>
 
@@ -73,20 +80,6 @@
                     </div>
                 </div>
             </form>
-        </div>
-    </div>
-
-    <div class="card mt-4">
-        <div class="card-header">IIDXMEMOとは？</div>
-        <div class="card-body">
-            <p>beatmania IIDXのACに収録されている楽曲のメモを気軽に行えるサービスです。</p>
-            <ul>
-                <li>クリアできそうな曲</li>
-                <li>スコアが伸びそうな曲</li>
-                <li>好きな曲</li>
-                <li>ライブ配信のリクエスト曲</li>
-            </ul>
-            <p>…などなど、様々な用途でメモをしたくなったときにご利用ください。</p>
         </div>
     </div>
 @endsection
