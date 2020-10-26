@@ -63,7 +63,15 @@
             })
             .fail(function(xhr) {
                 //通信失敗時の処理
-                console.log(xhr);
+                var error_message = '';
+                if (xhr.status == 419) {
+                    error_message = "一定期間操作されていませんでした。\nブラウザを読み込みしなおしてください。";
+                } else {
+                    $.each(xhr.responseJSON.errors, function(index, value){
+                        error_message = error_message + value + "\n";
+                    });
+                }
+                alert(error_message);
             })
             .always(function(xhr, msg) {
                 //結果に関わらず実行したい処理
@@ -147,7 +155,15 @@
                 })
                 .fail(function(xhr) {
                     //通信失敗時の処理
-                    console.log(xhr);
+                    var error_message = '';
+                    if (xhr.status == 419) {
+                        error_message = "一定期間操作されていませんでした。\nブラウザを読み込みしなおしてください。";
+                    } else {
+                        $.each(xhr.responseJSON.errors, function(index, value){
+                            error_message = error_message + value + "\n";
+                        });
+                    }
+                    alert(error_message);
                 })
                 .always(function(xhr, msg) {
                     //結果に関わらず実行したい処理
