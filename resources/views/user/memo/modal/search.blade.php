@@ -47,10 +47,12 @@
                     </div>
                     <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitSearchForm();">検索</button>
                     <div class="border mt-4 mb-4"></div>
-                    <table class="table table-bordered table-hover">
-                        <tbody id="music_list">
-                        </tbody>
-                    </table>
+                    <div id="scroll-area">
+                        <table class="table table-bordered table-hover">
+                            <tbody id="music_list">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light w-125px disabled_button" data-dismiss="modal">閉じる</button>
@@ -84,6 +86,7 @@
         })
             .done(function(response) {
                 //通信成功時の処理
+                $('#scroll-area').attr('style', 'max-height: 400px; overflow-y: scroll;');
                 var html = '';
                 $.each(response, function(index, value){
                     html += '<tr>';
