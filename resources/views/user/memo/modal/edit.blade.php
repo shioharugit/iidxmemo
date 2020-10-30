@@ -77,7 +77,7 @@
     function submitEditForm() {
         $('.disabled_button').prop('disabled', true);
         $.ajax({
-            url: '/user/memo/update/'+$('#memo_id').val(),
+            url: '{{ route('home') }}/user/memo/update/'+$('#memo_id').val(),
             type: 'post',
             cache: false,
             dataType:'json',
@@ -113,7 +113,7 @@
         if (confirm(alert_message)) {
             $('.disabled_button').prop('disabled', true);
             $.ajax({
-                url: '/user/memo/destroy/'+$('#memo_id').val(),
+                url: '{{ route('home') }}/user/memo/destroy/'+$('#memo_id').val(),
                 type: 'post',
                 cache: false,
                 dataType:'json',
