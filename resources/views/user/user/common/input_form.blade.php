@@ -86,7 +86,7 @@
                                 <span class="text-danger"><strong>{{$errors->first('password_confirmation')}}</strong></span><br>
                             @endif
                             <small class="text-muted">
-                                ※半角英数字記号(_-@)6文字以上20文字以内で入力してください。<br>
+                                ※8文字以上20文字以内で入力してください。<br>
                                 ※他のシステムで使用しているパスワードを使用しないようにしてください。
                             </small>
                         </div>
