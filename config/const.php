@@ -44,6 +44,7 @@ return [
         26 => 'Rootage',
         27 => 'HEROIC VERSE',
         28 => 'BISTROVER',
+        29 => 'CastHour',
     ],
 
     // SP難易度
