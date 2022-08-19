@@ -46,7 +46,7 @@ class Music extends Model
 
         if (!empty($params['free'])) {
             $free = $params['free'];
-            $query = Music::where(function ($query) use ($free) {
+            $query->where(function ($query) use ($free) {
                 $query->orWhere('title', 'LIKE', '%' . $free . '%')
                     ->orWhere('genre', 'LIKE', '%' . $free . '%')
                     ->orWhere('artist', 'LIKE', '%' . $free . '%')
@@ -56,7 +56,7 @@ class Music extends Model
 
         if (!empty($params['sp_difficulty'])) {
             $sp_difficulty = $params['sp_difficulty'];
-            $query = Music::where(function ($query) use ($sp_difficulty) {
+            $query->where(function ($query) use ($sp_difficulty) {
                 $query->orWhere('sp_beginner', '=', $sp_difficulty)
                     ->orWhere('sp_normal', '=', $sp_difficulty)
                     ->orWhere('sp_hyper', '=', $sp_difficulty)
@@ -67,7 +67,7 @@ class Music extends Model
 
         if (!empty($params['dp_difficulty'])) {
             $dp_difficulty = $params['dp_difficulty'];
-            $query = Music::where(function ($query) use ($dp_difficulty) {
+            $query->where(function ($query) use ($dp_difficulty) {
                 $query->orWhere('dp_beginner', '=', $dp_difficulty)
                     ->orWhere('dp_normal', '=', $dp_difficulty)
                     ->orWhere('dp_hyper', '=', $dp_difficulty)
