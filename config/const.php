@@ -45,6 +45,7 @@ return [
         27 => 'HEROIC VERSE',
         28 => 'BISTROVER',
         29 => 'CastHour',
+        30 => 'RESIDENT',
     ],
 
     // SP難易度
