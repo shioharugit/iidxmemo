@@ -46,6 +46,7 @@ return [
         28 => 'BISTROVER',
         29 => 'CastHour',
         30 => 'RESIDENT',
+        31 => 'EPOLIS',
     ],
 
     // SP難易度
