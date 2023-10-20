@@ -7,8 +7,145 @@
         </ol>
     </nav>
     <div class="card mt-3">
-        <h5 class="card-header"><button type="button" class="btn btn-primary w-150px" onclick="openSearchModal();">楽曲検索</button></h5>
+        <div class="card-header">
+            <button type="button"
+                    class="btn btn-primary btn-lg btn-block"
+                    data-toggle="collapse"
+                    data-target="#search_area"
+            >絞り込み</button>
+        </div>
         <div class="card-body">
+            <form action="" method="POST" onsubmit="return false;">
+                @csrf
+                <div class="form-group collapse" id="search_area">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <div class="card">
+                                <div class="card-header">バージョン</div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitSearchForm();">全て選ぶ</button>
+                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitSearchForm();">全て外す</button>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            @foreach (config('const.VERSION') as $key => $version)
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="version_checkbox_{{ $key }}" value="{{ $key }}" checked="checked">
+                                                    <label class="form-check-label" for="version_checkbox_{{ $key }}">{{ $version }}</label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="card">
+                                <div class="card-header">SP難易度</div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitSearchForm();">全て選ぶ</button>
+                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitSearchForm();">全て外す</button>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            @foreach (config('const.SP_DIFFICULTY') as $key => $sp_difficulty)
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="sp_difficulty_checkbox_{{ $key }}" value="{{ $key }}" checked="checked">
+                                                    <label class="form-check-label" for="sp_difficulty_checkbox_{{ $key }}">{{ $sp_difficulty }}</label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="card">
+                                <div class="card-header">DP難易度</div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitSearchForm();">全て選ぶ</button>
+                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitSearchForm();">全て外す</button>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            @foreach (config('const.DP_DIFFICULTY') as $key => $dp_difficulty)
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="dp_difficulty_checkbox_{{ $key }}" value="{{ $key }}" checked="checked">
+                                                    <label class="form-check-label" for="dp_difficulty_checkbox_{{ $key }}">{{ $dp_difficulty }}</label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="card">
+                                <div class="card-header">メモの有無</div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            @foreach (config('const.SP_DIFFICULTY') as $key => $sp_difficulty)
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="memo_radio_{{ $key }}" value="{{ $key }}">
+                                                    <label class="form-check-label" for="memo_radio_{{ $key }}">{{ $sp_difficulty }}</label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <div class="card">
+                                <div class="card-header">フラグの有無</div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            @foreach (config('const.SP_DIFFICULTY') as $key => $sp_difficulty)
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" id="check_flag_radio_{{ $key }}" value="{{ $key }}">
+                                                    <label class="form-check-label" for="check_flag_radio_{{ $key }}">{{ $sp_difficulty }}</label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <div class="card">
+                                <div class="card-header">フリーワード</div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="search_free"
+                                                   name="search_free"
+                                                   value=""
+                                                   placeholder="俗称でもある程度検索できます"
+                                                   maxlength="255"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
             @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}
