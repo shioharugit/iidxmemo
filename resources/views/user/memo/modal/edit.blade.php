@@ -5,7 +5,7 @@
                 @csrf
                 <input type="hidden" id="memo_id" name="memo_id" value="">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal_title"></h5>
+                    <div class="modal-title" id="modal_title"></div>
                     <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="memo_sp_beginner" class="col-sm-2 col-form-label font-weight-bold">SP難易度</label>
+                        <label class="col-sm-2 col-form-label font-weight-bold">SP難易度</label>
                         <div class="col-sm-10">
                             <div class="h4">
                                 <label class="beginner" id="memo_sp_beginner"></label> / <label class="normal" id="memo_sp_normal"></label> / <label class="hyper" id="memo_sp_hyper"></label> / <label class="another" id="memo_sp_another"></label> / <label class="leggendaria" id="memo_sp_leggendaria"></label>
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="memo_sp_beginner" class="col-sm-2 col-form-label font-weight-bold">DP難易度</label>
+                        <label class="col-sm-2 col-form-label font-weight-bold">DP難易度</label>
                         <div class="col-sm-10">
                             <div class="h4">
                                 <label class="beginner" id="memo_dp_beginner"></label> / <label class="normal" id="memo_dp_normal"></label> / <label class="hyper" id="memo_dp_hyper"></label> / <label class="another" id="memo_dp_another"></label> / <label class="leggendaria" id="memo_dp_leggendaria"></label>
