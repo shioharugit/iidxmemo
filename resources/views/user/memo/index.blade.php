@@ -9,13 +9,13 @@
     <div class="card mt-3">
         <div class="card-header">
             <button type="button"
-                    class="btn btn-primary btn-lg btn-block"
+                    class="btn btn-success btn-lg btn-block"
                     data-toggle="collapse"
                     data-target="#search_area"
             >絞り込み</button>
         </div>
         <div class="card-body">
-            <form action="" method="POST" onsubmit="return false;">
+            <form id="search_area_form" action="" method="POST" onsubmit="return false;">
                 @csrf
                 <div class="form-group collapse" id="search_area">
                     <div class="form-row">
@@ -25,13 +25,13 @@
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitSearchForm();">全て選ぶ</button>
-                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitSearchForm();">全て外す</button>
+                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="version_all_select">全て選ぶ</button>
+                                            <button type="button" class="btn btn-warning w-125px disabled_button" id="version_all_remove">全て外す</button>
                                         </div>
                                         <div class="form-group col-md-12">
                                             @foreach (config('const.VERSION') as $key => $version)
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" id="version_checkbox_{{ $key }}" value="{{ $key }}" checked="checked">
+                                                    <input class="form-check-input" type="checkbox" id="version_checkbox_{{ $key }}" name="search_version" value="{{ $key }}">
                                                     <label class="form-check-label" for="version_checkbox_{{ $key }}">{{ $version }}</label>
                                                 </div>
                                             @endforeach
@@ -48,13 +48,13 @@
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitSearchForm();">全て選ぶ</button>
-                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitSearchForm();">全て外す</button>
+                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="sp_difficulty_all_select">全て選ぶ</button>
+                                            <button type="button" class="btn btn-warning w-125px disabled_button" id="sp_difficulty_all_remove">全て外す</button>
                                         </div>
                                         <div class="form-group col-md-12">
                                             @foreach (config('const.SP_DIFFICULTY') as $key => $sp_difficulty)
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" id="sp_difficulty_checkbox_{{ $key }}" value="{{ $key }}" checked="checked">
+                                                    <input class="form-check-input" type="checkbox" id="sp_difficulty_checkbox_{{ $key }}" name="search_sp_difficulty" value="{{ $key }}">
                                                     <label class="form-check-label" for="sp_difficulty_checkbox_{{ $key }}">{{ $sp_difficulty }}</label>
                                                 </div>
                                             @endforeach
@@ -69,13 +69,13 @@
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitSearchForm();">全て選ぶ</button>
-                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitSearchForm();">全て外す</button>
+                                            <button type="button" class="btn btn-primary w-125px disabled_button" id="dp_difficulty_all_select">全て選ぶ</button>
+                                            <button type="button" class="btn btn-warning w-125px disabled_button" id="dp_difficulty_all_remove">全て外す</button>
                                         </div>
                                         <div class="form-group col-md-12">
                                             @foreach (config('const.DP_DIFFICULTY') as $key => $dp_difficulty)
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" id="dp_difficulty_checkbox_{{ $key }}" value="{{ $key }}" checked="checked">
+                                                    <input class="form-check-input" type="checkbox" id="dp_difficulty_checkbox_{{ $key }}" name="search_dp_difficulty" value="{{ $key }}">
                                                     <label class="form-check-label" for="dp_difficulty_checkbox_{{ $key }}">{{ $dp_difficulty }}</label>
                                                 </div>
                                             @endforeach
@@ -92,10 +92,10 @@
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            @foreach (config('const.SP_DIFFICULTY') as $key => $sp_difficulty)
+                                            @foreach (config('const.MEMO_RADIO_BUTTON') as $key => $memo_radio)
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" id="memo_radio_{{ $key }}" value="{{ $key }}">
-                                                    <label class="form-check-label" for="memo_radio_{{ $key }}">{{ $sp_difficulty }}</label>
+                                                    <input class="form-check-input" type="radio" id="memo_radio_{{ $key }}" name="search_memo_radio" value="{{ $key }}">
+                                                    <label class="form-check-label" for="memo_radio_{{ $key }}">{{ $memo_radio }}</label>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -109,10 +109,10 @@
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            @foreach (config('const.SP_DIFFICULTY') as $key => $sp_difficulty)
+                                            @foreach (config('const.CHECK_FLAG_RADIO_BUTTON') as $key => $check_flag_radio)
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" id="check_flag_radio_{{ $key }}" value="{{ $key }}">
-                                                    <label class="form-check-label" for="check_flag_radio_{{ $key }}">{{ $sp_difficulty }}</label>
+                                                    <input class="form-check-input" type="radio" id="check_flag_radio_{{ $key }}" name="search_check_flag_radio" value="{{ $key }}">
+                                                    <label class="form-check-label" for="check_flag_radio_{{ $key }}">{{ $check_flag_radio }}</label>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -129,6 +129,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <input type="text"
+                                                   aria-label="フリーワード"
                                                    class="form-control"
                                                    id="search_free"
                                                    name="search_free"
@@ -151,94 +152,216 @@
                     {{ session('status') }}
                 </div>
             @endif
-            <div class="d-flex justify-content-center" id="loading">
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
+            <div id="loading_area"></div>
             <table class="table table-bordered table-hover">
                 <tbody id="memo_list">
                 </tbody>
             </table>
         </div>
     </div>
-    @include('user.memo.modal.search')
     @include('user.memo.modal.edit')
     <script>
-        getMemo();
+        cookieParamCheck();
+        search();
+
+        $('#version_all_select').on('click', function () {
+            $("input[name='search_version']").prop('checked', true);
+            search();
+        });
+
+        $('#version_all_remove').on('click', function () {
+            $("input[name='search_version']").prop('checked', false);
+            search();
+        });
+
+        $('#sp_difficulty_all_select').on('click', function () {
+            $("input[name='search_sp_difficulty']").prop('checked', true);
+            search();
+        });
+
+        $('#sp_difficulty_all_remove').on('click', function () {
+            $("input[name='search_sp_difficulty']").prop('checked', false);
+            search();
+        });
+
+        $('#dp_difficulty_all_select').on('click', function () {
+            $("input[name='search_dp_difficulty']").prop('checked', true);
+            search();
+        });
+
+        $('#dp_difficulty_all_remove').on('click', function () {
+            $("input[name='search_dp_difficulty']").prop('checked', false);
+            search();
+        });
+
+        $('#search_area_form').change(function () {
+            search();
+        });
+
+        function search() {
+            $('#memo_list').empty();
+            startLoading();
+            getMemo();
+        }
+
+        function cookieParamCheck() {
+            $.cookie.json = true;
+            let cookie_search_params = $.cookie('cookie_search_params');
+            if (cookie_search_params) {
+                // クッキーありの場合、クッキーの検索値を画面の検索条件に反映
+                if (cookie_search_params.search_version.length !== 0) {
+                    $.each(cookie_search_params.search_version, function (index, val) {
+                        $("#version_checkbox_" + val).prop('checked', true);
+                    });
+                }
+                if (cookie_search_params.search_sp_difficulty.length !== 0) {
+                    $.each(cookie_search_params.search_sp_difficulty, function (index, val) {
+                        $("#sp_difficulty_checkbox_" + val).prop('checked', true);
+                    });
+                }
+                if (cookie_search_params.search_dp_difficulty.length !== 0) {
+                    $.each(cookie_search_params.search_dp_difficulty, function (index, val) {
+                        $("#dp_difficulty_checkbox_" + val).prop('checked', true);
+                    });
+                }
+                if (cookie_search_params.search_memo_radio) {
+                    $("#memo_radio_" + cookie_search_params.search_memo_radio).prop('checked', true);
+                }
+                if (cookie_search_params.search_check_flag_radio) {
+                    $("#check_flag_radio_" + cookie_search_params.search_check_flag_radio).prop('checked', true);
+                }
+                if (cookie_search_params.search_free) {
+                    $("#search_free").val(cookie_search_params.search_free);
+                }
+            } else {
+                // クッキーなしの場合、初期表示を画面の検索条件に反映
+                // バージョンは全てにチェック
+                $("input[name='search_version']").prop('checked', true);
+                // SP難易度は全てにチェック
+                $("input[name='search_sp_difficulty']").prop('checked', true);
+                // DP難易度は全てにチェック
+                $("input[name='search_dp_difficulty']").prop('checked', true);
+                // メモの有無は指定なしにチェック
+                $('#memo_radio_0').prop('checked', true);
+                // フラグの有無は指定なしにチェック
+                $('#check_flag_radio_0').prop('checked', true);
+            }
+        }
+
+        function startLoading() {
+            let html = '';
+            html += '<div class="d-flex justify-content-center" id="loading">';
+            html += '<div class="spinner-border" role="status">';
+            html += '<span class="sr-only">Loading...</span>';
+            html += '</div>';
+            html += '</div>';
+            $('#loading_area').html(html);
+        }
 
         function getMemo() {
-            var url = '{{ route('user.memo.list') }}';
+            const url = '{{ route('user.memo.list') }}';
+            const search_version = $('input[name=search_version]:checked').map(function () {
+                return $(this).val();
+            }).get();
+            const search_sp_difficulty = $('input[name=search_sp_difficulty]:checked').map(function () {
+                return $(this).val();
+            }).get();
+            const search_dp_difficulty = $('input[name=search_dp_difficulty]:checked').map(function () {
+                return $(this).val();
+            }).get();
+            const search_memo_radio = $('input:radio[name="search_memo_radio"]:checked').val();
+            const search_check_flag_radio = $('input:radio[name="search_check_flag_radio"]:checked').val();
+            const search_free = $('input[name="search_free"]').val();
+            const search_params = {
+                'search_version': search_version,
+                'search_sp_difficulty': search_sp_difficulty,
+                'search_dp_difficulty': search_dp_difficulty,
+                'search_memo_radio': search_memo_radio,
+                'search_check_flag_radio': search_check_flag_radio,
+                'search_free': search_free
+            };
             $.ajax({
                 url: url,
                 type: 'post',
                 cache: false,
-                dataType:'json',
+                dataType: 'json',
                 data: {
-                    '_token': $('input[name="_token"]').val()
+                    '_token': $('input[name="_token"]').val(),
+                    'search_version': search_version,
+                    'search_sp_difficulty': search_sp_difficulty,
+                    'search_dp_difficulty': search_dp_difficulty,
+                    'memo_radio': search_memo_radio,
+                    'check_flag_radio': search_check_flag_radio,
+                    'search_free': search_free
                 },
             })
-            .done(function(response) {
-                //通信成功時の処理
-                var html = '';
-                $.each(response, function(index, value){
-                    html += '<tr>';
-                    html += '<td class="pointer" onclick="getEditMemo('+value.memo_id+');">';
-                    html += value.title;
-                    html += '<input type="hidden" id="registered_music_id_'+value.music_id+'" value="'+value.music_id+'">';
-                    html += '</td>';
-                    html += '</tr>';
-                });
-                $('#loading').remove();
-                if (html == '') {
-                    html = '<tr><td>メモが登録されていません。</td></tr>';
-                }
-                $('#memo_list').html(html);
+                .done(function (response) {
+                    //通信成功時の処理
 
-                // メモ削除後に一覧を表示する際、Modalを閉じる
-                $('#EditModal').modal('hide');
-            })
-            .fail(function(xhr) {
-                //通信失敗時の処理
-                var error_message = '';
-                if (xhr.status == 419) {
-                    error_message = "一定期間操作されていませんでした。\nブラウザを読み込みしなおしてください。";
-                } else {
-                    $.each(xhr.responseJSON.errors, function(index, value){
-                        error_message = error_message + value + "\n";
+                    // 検索条件をクッキーに保存
+                    $.cookie.json = true;
+                    $.cookie('cookie_search_params', search_params);
+
+                    // 検索結果の表示
+                    let html = '';
+                    $.each(response, function (index, value) {
+                        html += '<tr>';
+                        html += '<td class="pointer" onclick="getEditMemo(' + value.memo_id + ');">';
+                        html += value.title;
+                        html += '<input type="hidden" id="registered_music_id_' + value.music_id + '" value="' + value.music_id + '">';
+                        html += '</td>';
+                        html += '</tr>';
                     });
-                }
-                alert(error_message);
-            })
-            .always(function(xhr, msg) {
-                //結果に関わらず実行したい処理
-            });
+                    $('#loading').remove();
+                    if (html === '') {
+                        html = '<tr><td>検索結果が0件でした。</td></tr>';
+                    }
+                    $('#memo_list').html(html);
+
+                    // メモ削除後に一覧を表示する際、Modalを閉じる
+                    $('#EditModal').modal('hide');
+                })
+                .fail(function (xhr) {
+                    //通信失敗時の処理
+                    let error_message = '';
+                    if (xhr.status === 419) {
+                        error_message = "一定期間操作されていませんでした。\nブラウザを読み込みしなおしてください。";
+                    } else {
+                        $.each(xhr.responseJSON.errors, function (index, value) {
+                            error_message = error_message + value + "\n";
+                        });
+                    }
+                    alert(error_message);
+                })
+                .always(function (xhr, msg) {
+                    //結果に関わらず実行したい処理
+                });
         }
 
         function getEditMemo(memo_id) {
             $('.disabled_button').prop('disabled', false);
-            var url = '{{ route('user.memo.list') }}';
+            const url = '{{ route('user.memo.list') }}';
             $.ajax({
                 url: url,
                 type: 'post',
                 cache: false,
-                dataType:'json',
+                dataType: 'json',
                 data: {
                     '_token': $('input[name="_token"]').val(),
                     'memo_id': memo_id
                 },
             })
-                .done(function(response) {
+                .done(function (response) {
                     //通信成功時の処理
                     $('#memo').remove();
                     $('#display_memo').html('<textarea class="form-control" rows="10" id="memo" name="memo"></textarea>');
-                    $.each(response, function(index, value) {
+                    $.each(response, function (index, value) {
                         switch (value.version) {
-                        @foreach (config('const.VERSION') as $key => $version)
+                            @foreach (config('const.VERSION') as $key => $version)
                             case '{{$key}}' :
-                            value.version = '{{$version}}';
-                            break;
-                        @endforeach
+                                value.version = '{{$version}}';
+                                break;
+                            @endforeach
                         }
                         $('#memo_id').val(value.memo_id);
                         $('#memo_version').val(value.version);
@@ -290,32 +413,21 @@
                     });
                     $('#EditModal').modal('show');
                 })
-                .fail(function(xhr) {
+                .fail(function (xhr) {
                     //通信失敗時の処理
-                    var error_message = '';
-                    if (xhr.status == 419) {
+                    let error_message = '';
+                    if (xhr.status === 419) {
                         error_message = "一定期間操作されていませんでした。\nブラウザを読み込みしなおしてください。";
                     } else {
-                        $.each(xhr.responseJSON.errors, function(index, value){
+                        $.each(xhr.responseJSON.errors, function (index, value) {
                             error_message = error_message + value + "\n";
                         });
                     }
                     alert(error_message);
                 })
-                .always(function(xhr, msg) {
+                .always(function (xhr, msg) {
                     //結果に関わらず実行したい処理
                 });
-        }
-
-        function openSearchModal() {
-            $('.disabled_button').prop('disabled', false);
-            $('#search_version').val('');
-            $('#search_free').val('');
-            $('#search_sp_difficulty').val('');
-            $('#search_dp_difficulty').val('');
-            var html = '<tr><td>検索してください。</td></tr>';
-            $('#music_list').html(html);
-            $('#SearchModal').modal('show');
         }
     </script>
 @endsection

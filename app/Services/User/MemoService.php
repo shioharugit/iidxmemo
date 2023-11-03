@@ -24,12 +24,34 @@ class MemoService
         $params = [
             'user_id' => Auth::user()->id,
             'memo_id' => $request->memo_id,
+            'version' => $request->search_version,
+            'search_sp_difficulty' => $request->search_sp_difficulty,
+            'search_dp_difficulty' => $request->search_dp_difficulty,
+            'search_free' => $request->search_free,
             'deleted_at_is_null' => true,
             'order_by' => [
-                'column' => 'memos.updated_at',
-                'sort' => 'DESC',
+                'column' => 'musics.title',
+                'sort' => 'ASC',
             ],
         ];
+
+        // 検索条件メモの有無
+        if (isset($request->memo_radio) && $request->memo_radio == 1) {
+            // ラジオボタンのvalue=1はメモあり
+            $params['memo_not_null'] = true;
+        } elseif (isset($request->memo_radio) && $request->memo_radio == 2) {
+            // ラジオボタンのvalue=2はメモなし
+            $params['memo_is_null'] = true;
+        }
+
+        // 検索条件フラグの有無
+        if (isset($request->check_flag_radio) && $request->check_flag_radio == 1) {
+            // ラジオボタンのvalue=1はフラグあり
+            $params['check_flag'] = config('const.FLAG_ON');
+        } elseif (isset($request->check_flag_radio) && $request->check_flag_radio == 2) {
+            // ラジオボタンのvalue=1はフラグなし
+            $params['check_flag'] = config('const.FLAG_OFF');
+        }
 
         return $this->memo->getMemo($params);
     }
