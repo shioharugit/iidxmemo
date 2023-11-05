@@ -58,6 +58,19 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label font-weight-bold">フラグ</label>
+                        <div class="col-sm-10">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="memo_check_flag_{{config('const.FLAG_ON')}}" name="memo_check_flag" value="{{config('const.FLAG_ON')}}">
+                                <label class="form-check-label" for="memo_check_flag_{{config('const.FLAG_ON')}}">オン</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="memo_check_flag_{{config('const.FLAG_OFF')}}" name="memo_check_flag" value="{{config('const.FLAG_OFF')}}">
+                                <label class="form-check-label" for="memo_check_flag_{{config('const.FLAG_OFF')}}">オフ</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="memo" class="col-sm-2 col-form-label font-weight-bold">メモ</label>
                         <div class="col-sm-10" id="display_memo">
                             <textarea class="form-control" rows="10" id="memo" name="memo"></textarea>
@@ -66,7 +79,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary w-125px disabled_button" id="submit_button" onclick="submitEditForm();">更新</button>
-                    <button type="button" class="btn btn-danger w-125px disabled_button" id="submit_button" onclick="submitDeleteForm();">削除</button>
                     <button type="button" class="btn btn-light w-125px disabled_button" data-dismiss="modal">閉じる</button>
                 </div>
             </form>
@@ -83,18 +95,20 @@
             dataType:'json',
             data: {
                 '_token': $('input[name="_token"]').val(),
+                'memo_check_flag': $('input:radio[name="memo_check_flag"]:checked').val(),
                 'memo': $('#memo').val(),
             },
         })
             .done(function(response) {
                 //通信成功時の処理
                 alert(response.messages);
+                search();
                 $('.disabled_button').prop('disabled', false);
             })
             .fail(function(xhr) {
                 //通信失敗時の処理
-                var error_message = '';
-                if (xhr.status == 419) {
+                let error_message = '';
+                if (xhr.status === 419) {
                     error_message = "一定期間操作されていませんでした。\nブラウザを読み込みしなおしてください。";
                 } else {
                     $.each(xhr.responseJSON.errors, function(index, value){
@@ -106,43 +120,5 @@
             .always(function(xhr, msg) {
                 //結果に関わらず実行したい処理
             });
-    }
-
-    function submitDeleteForm() {
-        var alert_message = "メモを一覧から削除しますか？\n※メモを再登録したときに最後に更新した状態のメモを見ることができます。"
-        if (confirm(alert_message)) {
-            $('.disabled_button').prop('disabled', true);
-            $.ajax({
-                url: '{{ route('home') }}/user/memo/destroy/'+$('#memo_id').val(),
-                type: 'post',
-                cache: false,
-                dataType:'json',
-                data: {
-                    '_token': $('input[name="_token"]').val(),
-                },
-            })
-                .done(function(response) {
-                    //通信成功時の処理
-                    alert(response.messages);
-                    getMemo();
-                })
-                .fail(function(xhr) {
-                    //通信失敗時の処理
-                    var error_message = '';
-                    if (xhr.status == 419) {
-                        error_message = "一定期間操作されていませんでした。\nブラウザを読み込みしなおしてください。";
-                    } else {
-                        $.each(xhr.responseJSON.errors, function(index, value){
-                            error_message = error_message + value + "\n";
-                        });
-                    }
-                    alert(error_message);
-                })
-                .always(function(xhr, msg) {
-                    //結果に関わらず実行したい処理
-                });
-        } else {
-            return false;
-        }
     }
 </script>

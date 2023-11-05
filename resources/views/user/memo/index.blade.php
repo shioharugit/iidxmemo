@@ -94,8 +94,8 @@
                                         <div class="form-group col-md-12">
                                             @foreach (config('const.MEMO_RADIO_BUTTON') as $key => $memo_radio)
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" id="memo_radio_{{ $key }}" name="search_memo_radio" value="{{ $key }}">
-                                                    <label class="form-check-label" for="memo_radio_{{ $key }}">{{ $memo_radio }}</label>
+                                                    <input class="form-check-input" type="radio" id="search_memo_radio_{{ $key }}" name="search_memo_radio" value="{{ $key }}">
+                                                    <label class="form-check-label" for="search_memo_radio_{{ $key }}">{{ $memo_radio }}</label>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -111,8 +111,8 @@
                                         <div class="form-group col-md-12">
                                             @foreach (config('const.CHECK_FLAG_RADIO_BUTTON') as $key => $check_flag_radio)
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" id="check_flag_radio_{{ $key }}" name="search_check_flag_radio" value="{{ $key }}">
-                                                    <label class="form-check-label" for="check_flag_radio_{{ $key }}">{{ $check_flag_radio }}</label>
+                                                    <input class="form-check-input" type="radio" id="search_check_flag_radio_{{ $key }}" name="search_check_flag_radio" value="{{ $key }}">
+                                                    <label class="form-check-label" for="search_check_flag_radio_{{ $key }}">{{ $check_flag_radio }}</label>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -225,10 +225,10 @@
                     });
                 }
                 if (cookie_search_params.search_memo_radio) {
-                    $("#memo_radio_" + cookie_search_params.search_memo_radio).prop('checked', true);
+                    $("#search_memo_radio_" + cookie_search_params.search_memo_radio).prop('checked', true);
                 }
                 if (cookie_search_params.search_check_flag_radio) {
-                    $("#check_flag_radio_" + cookie_search_params.search_check_flag_radio).prop('checked', true);
+                    $("#search_check_flag_radio_" + cookie_search_params.search_check_flag_radio).prop('checked', true);
                 }
                 if (cookie_search_params.search_free) {
                     $("#search_free").val(cookie_search_params.search_free);
@@ -242,9 +242,9 @@
                 // DP難易度は全てにチェック
                 $("input[name='search_dp_difficulty']").prop('checked', true);
                 // メモの有無は指定なしにチェック
-                $('#memo_radio_0').prop('checked', true);
+                $('#search_memo_radio_0').prop('checked', true);
                 // フラグの有無は指定なしにチェック
-                $('#check_flag_radio_0').prop('checked', true);
+                $('#search_check_flag_radio_0').prop('checked', true);
             }
         }
 
@@ -290,8 +290,8 @@
                     'search_version': search_version,
                     'search_sp_difficulty': search_sp_difficulty,
                     'search_dp_difficulty': search_dp_difficulty,
-                    'memo_radio': search_memo_radio,
-                    'check_flag_radio': search_check_flag_radio,
+                    'search_memo_radio': search_memo_radio,
+                    'search_check_flag_radio': search_check_flag_radio,
                     'search_free': search_free
                 },
             })
@@ -409,6 +409,7 @@
                             value.dp_leggendaria = '-';
                         }
                         $('#memo_dp_leggendaria').text(value.dp_leggendaria);
+                        $("#memo_check_flag_" + value.check_flag).prop('checked', true);
                         $('#memo').text(value.memo);
                     });
                     $('#EditModal').modal('show');
