@@ -430,5 +430,41 @@
                     //結果に関わらず実行したい処理
                 });
         }
+
+        function submitEditForm() {
+            $('.disabled_button').prop('disabled', true);
+            $.ajax({
+                url: '{{ route('home') }}/user/memo/update/'+$('#memo_id').val(),
+                type: 'post',
+                cache: false,
+                dataType:'json',
+                data: {
+                    '_token': $('input[name="_token"]').val(),
+                    'memo_check_flag': $('input:radio[name="memo_check_flag"]:checked').val(),
+                    'memo': $('#memo').val(),
+                },
+            })
+                .done(function(response) {
+                    //通信成功時の処理
+                    alert(response.messages);
+                    search();
+                    $('.disabled_button').prop('disabled', false);
+                })
+                .fail(function(xhr) {
+                    //通信失敗時の処理
+                    let error_message = '';
+                    if (xhr.status === 419) {
+                        error_message = "一定期間操作されていませんでした。\nブラウザを読み込みしなおしてください。";
+                    } else {
+                        $.each(xhr.responseJSON.errors, function(index, value){
+                            error_message = error_message + value + "\n";
+                        });
+                    }
+                    alert(error_message);
+                })
+                .always(function(xhr, msg) {
+                    //結果に関わらず実行したい処理
+                });
+        }
     </script>
 @endsection
