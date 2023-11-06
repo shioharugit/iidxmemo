@@ -300,7 +300,7 @@
 
                     // 検索条件をクッキーに保存
                     $.cookie.json = true;
-                    $.cookie('cookie_search_params', search_params);
+                    $.cookie('cookie_search_params', search_params, {expires: 30});
 
                     // 検索結果の表示
                     let html = '';
@@ -434,35 +434,35 @@
         function submitEditForm() {
             $('.disabled_button').prop('disabled', true);
             $.ajax({
-                url: '{{ route('home') }}/user/memo/update/'+$('#memo_id').val(),
+                url: '{{ route('home') }}/user/memo/update/' + $('#memo_id').val(),
                 type: 'post',
                 cache: false,
-                dataType:'json',
+                dataType: 'json',
                 data: {
                     '_token': $('input[name="_token"]').val(),
                     'memo_check_flag': $('input:radio[name="memo_check_flag"]:checked').val(),
                     'memo': $('#memo').val(),
                 },
             })
-                .done(function(response) {
+                .done(function (response) {
                     //通信成功時の処理
                     alert(response.messages);
                     search();
                     $('.disabled_button').prop('disabled', false);
                 })
-                .fail(function(xhr) {
+                .fail(function (xhr) {
                     //通信失敗時の処理
                     let error_message = '';
                     if (xhr.status === 419) {
                         error_message = "一定期間操作されていませんでした。\nブラウザを読み込みしなおしてください。";
                     } else {
-                        $.each(xhr.responseJSON.errors, function(index, value){
+                        $.each(xhr.responseJSON.errors, function (index, value) {
                             error_message = error_message + value + "\n";
                         });
                     }
                     alert(error_message);
                 })
-                .always(function(xhr, msg) {
+                .always(function (xhr, msg) {
                     //結果に関わらず実行したい処理
                 });
         }
