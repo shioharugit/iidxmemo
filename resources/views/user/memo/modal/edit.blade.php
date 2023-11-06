@@ -42,23 +42,27 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">SP難易度</label>
-                        <div class="col-sm-10">
-                            <div class="h4">
-                                <label class="beginner" id="memo_sp_beginner"></label> / <label class="normal" id="memo_sp_normal"></label> / <label class="hyper" id="memo_sp_hyper"></label> / <label class="another" id="memo_sp_another"></label> / <label class="leggendaria" id="memo_sp_leggendaria"></label>
-                            </div>
+                        <div class="col-sm-2 col-form-label font-weight-bold">SP難易度</div>
+                        <div class="col-sm-10 h4 row">
+                            <div class="beginner col text-center" id="memo_sp_beginner"></div>
+                            <div class="normal col text-center" id="memo_sp_normal"></div>
+                            <div class="hyper col text-center" id="memo_sp_hyper"></div>
+                            <div class="another col text-center" id="memo_sp_another"></div>
+                            <div class="leggendaria col text-center" id="memo_sp_leggendaria"></div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">DP難易度</label>
-                        <div class="col-sm-10">
-                            <div class="h4">
-                                <label class="beginner" id="memo_dp_beginner"></label> / <label class="normal" id="memo_dp_normal"></label> / <label class="hyper" id="memo_dp_hyper"></label> / <label class="another" id="memo_dp_another"></label> / <label class="leggendaria" id="memo_dp_leggendaria"></label>
-                            </div>
+                        <div class="col-sm-2 col-form-label font-weight-bold">DP難易度</div>
+                        <div class="col-sm-10 h4 row">
+                            <div class="beginner col text-center" id="memo_dp_beginner"></div>
+                            <div class="normal col text-center" id="memo_dp_normal"></div>
+                            <div class="hyper col text-center" id="memo_dp_hyper"></div>
+                            <div class="another col text-center" id="memo_dp_another"></div>
+                            <div class="leggendaria col text-center" id="memo_dp_leggendaria"></div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label font-weight-bold">フラグ</label>
+                        <div class="col-sm-2 col-form-label font-weight-bold">フラグ</div>
                         <div class="col-sm-10">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" id="memo_check_flag_{{config('const.FLAG_ON')}}" name="memo_check_flag" value="{{config('const.FLAG_ON')}}">
