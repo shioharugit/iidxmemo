@@ -94,7 +94,6 @@ class UserController extends Controller
     /**
      * ユーザー更新処理
      * @param UserEditRequest $request
-     * @param $user_id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UserEditRequest $request)
