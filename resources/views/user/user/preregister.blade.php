@@ -32,7 +32,13 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="email">メールアドレス</label>
-                        <input type="text" name="email" id="email" class="form-control zen2han @error('email') is-invalid @enderror" value="{{ old('email') ? old('email') : $user->email ?? '' }}">
+                        <input type="text"
+                               name="email"
+                               id="email"
+                               class="form-control zen2han @error('email') is-invalid @enderror"
+                               value="{{ old('email') ? old('email') : $user->email ?? '' }}"
+                               autocomplete="off"
+                        >
                         @if(!empty($errors->first('email')))
                             <span class="text-danger"><strong>{!! $errors->first('email') !!}</strong></span>
                         @endif
@@ -42,7 +48,12 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="email_confirmation">メールアドレス（確認）</label>
-                        <input type="text" name="email_confirmation" id="email_confirmation" class="form-control zen2han @error('email_confirmation') is-invalid @enderror" value="{{ old('email_confirmation') ? old('email_confirmation') : $user->email ?? '' }}">
+                        <input type="text"
+                               name="email_confirmation"
+                               id="email_confirmation"
+                               class="form-control zen2han @error('email_confirmation') is-invalid @enderror"
+                               value="{{ old('email_confirmation') ? old('email_confirmation') : $user->email ?? '' }}"
+                        >
                         @if(!empty($errors->first('email_confirmation')))
                             <span class="text-danger"><strong>{{$errors->first('email_confirmation')}}</strong></span>
                         @endif
