@@ -17,8 +17,13 @@
 @else
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('user.memo.index') }}">メモ一覧</a></li>
-            <li class="breadcrumb-item active" aria-current="page">ユーザー更新</li>
+            @if ($type === 'create')
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">HOME</a></li>
+                <li class="breadcrumb-item active" aria-current="page">ユーザー新規登録</li>
+            @else
+                <li class="breadcrumb-item"><a href="{{ route('user.memo.index') }}">メモ一覧</a></li>
+                <li class="breadcrumb-item active" aria-current="page">ユーザー更新</li>
+            @endif
         </ol>
     </nav>
     <div class="card">
