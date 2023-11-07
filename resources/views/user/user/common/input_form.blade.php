@@ -35,8 +35,8 @@
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="email">メールアドレス</label>
-                            <div>{{$user->email ?? '' }}</div>
+                            <p>メールアドレス</p>
+                            <p>{{$user->email ?? '' }}</p>
                         </div>
                     </div>
 
