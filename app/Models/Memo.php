@@ -178,7 +178,7 @@ class Memo extends Model
     }
 
     /**
-     * ユーザーを登録したときに、現時点の収録楽曲分のメモのレコードを作成する
+     * ユーザーに現時点の収録楽曲分のメモのレコードを作成する
      * @param $user_id
      * @return array|bool
      */
@@ -199,7 +199,7 @@ class Memo extends Model
             $result = DB::insert($query, $params);
         } catch (Exception $e) {
             DB::rollback();
-            Log::error('ユーザー新規登録時の収録楽曲数分のメモ登録中に例外が発生しました:' . $e->getMessage());
+            Log::error('ユーザーに現時点の収録楽曲分のメモ登録中に例外が発生しました:' . $e->getMessage());
             abort(500);
         }
         DB::commit();

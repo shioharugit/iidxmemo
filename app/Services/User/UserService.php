@@ -144,7 +144,7 @@ class UserService
     }
 
     /**
-     * ユーザーを登録したときに、現時点の収録楽曲分のメモのレコードを作成する
+     * ユーザーに現時点の収録楽曲分のメモのレコードを作成する
      * @param $user_id
      * @return array|bool
      */
