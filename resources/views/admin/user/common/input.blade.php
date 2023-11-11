@@ -26,7 +26,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="email">メールアドレス</label>
-                        <input type="text" name="email" id="email" class="form-control zen2han @error('email') is-invalid @enderror" value="{{ old('email') ? old('email') : $user->email ?? '' }}">
+                        <input type="text" name="email" id="email" class="form-control zen2han @error('email') is-invalid @enderror" value="{{ old('email') ? old('email') : $user->email ?? '' }}" autocomplete="off">
                         @if(!empty($errors->first('email')))
                             <span class="text-danger"><strong>{!! $errors->first('email') !!}</strong></span>
                         @endif

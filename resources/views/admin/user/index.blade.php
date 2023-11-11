@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="email">メールアドレス</label>
-                            <input type="text" class="form-control zen2han" id="email" name="email" value="{{old('email') ? old('email') : $request->input('email')}}" maxlength="255">
+                            <input type="text" class="form-control zen2han" id="email" name="email" value="{{old('email') ? old('email') : $request->input('email')}}" maxlength="255" autocomplete="off">
                             @if(!empty($errors->first('email')))
                                 <span class="text-danger"><strong>{{$errors->first('email')}}</strong></span>
                             @endif
