@@ -206,7 +206,7 @@
 
         function cookieParamCheck() {
             $.cookie.json = true;
-            let cookie_search_params = $.cookie('cookie_search_params');
+            let cookie_search_params = $.cookie('cookie_search_params_{{Auth::user()->id}}');
             if (cookie_search_params) {
                 // クッキーありの場合、クッキーの検索値を画面の検索条件に反映
                 if (cookie_search_params.search_version.length !== 0) {
@@ -300,7 +300,7 @@
 
                     // 検索条件をクッキーに保存
                     $.cookie.json = true;
-                    $.cookie('cookie_search_params', search_params, {expires: 30});
+                    $.cookie('cookie_search_params_{{Auth::user()->id}}', search_params, {expires: 30});
 
                     // 検索結果の表示
                     let html = '';
