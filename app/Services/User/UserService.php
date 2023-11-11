@@ -3,6 +3,7 @@
 namespace App\Services\User;
 
 use App\Models\User as User;
+use App\Models\Memo as Memo;
 use App\Mail\EmailVerification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -14,10 +15,12 @@ use Exception;
 class UserService
 {
     private $user;
+    private $memo;
 
     public function __construct()
     {
         $this->user = new User();
+        $this->memo = new Memo();
     }
 
     /**
@@ -138,5 +141,15 @@ class UserService
             'id' => Auth::user()->id,
         ];
         return $this->user->updateUser($data, $where);
+    }
+
+    /**
+     * ユーザーを登録したときに、現時点の収録楽曲分のメモのレコードを作成する
+     * @param $user_id
+     * @return array|bool
+     */
+    public function createUserMemo($user_id)
+    {
+        return $this->memo->createUserMemo($user_id);
     }
 }

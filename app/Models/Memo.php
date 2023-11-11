@@ -176,4 +176,33 @@ class Memo extends Model
         DB::commit();
         return $result;
     }
+
+    /**
+     * ユーザーを登録したときに、現時点の収録楽曲分のメモのレコードを作成する
+     * @param $user_id
+     * @return array|bool
+     */
+    public function createUserMemo($user_id)
+    {
+        $result = [];
+        DB::beginTransaction();
+        try {
+            $params = [
+                'select_user_id' => $user_id,
+                'where_user_id' => $user_id,
+            ];
+            $query = 'INSERT INTO memos (user_id, music_id)
+                SELECT :select_user_id, musics.id
+                FROM musics
+                WHERE musics.deleted_at IS NULL
+                    AND musics.id NOT IN(SELECT memos.music_id FROM memos WHERE memos.user_id = :where_user_id);';
+            $result = DB::insert($query, $params);
+        } catch (Exception $e) {
+            DB::rollback();
+            Log::error('ユーザー新規登録時の収録楽曲数分のメモ登録中に例外が発生しました:' . $e->getMessage());
+            abort(500);
+        }
+        DB::commit();
+        return $result;
+    }
 }

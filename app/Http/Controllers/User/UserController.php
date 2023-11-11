@@ -72,6 +72,7 @@ class UserController extends Controller
             return redirect()->route('user.login');
         }
         $this->user->createUser($request, $user);
+        $this->user->createUserMemo($user->id);
         session()->flash('messages', ['ユーザーの登録が完了しました。ログインしてサービスをご利用ください。']);
 
         return redirect()->route('user.login');
