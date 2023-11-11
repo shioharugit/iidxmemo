@@ -85,6 +85,10 @@ class User extends Authenticatable
             $query->whereNull('email_verified_at');
         }
 
+        if (!empty($params['email_verified_at_is_not_null'])) {
+            $query->whereNotNull('email_verified_at');
+        }
+
         if (!empty($params['email_verify_token'])) {
             $query->where('email_verify_token', '=', $params['email_verify_token']);
         }

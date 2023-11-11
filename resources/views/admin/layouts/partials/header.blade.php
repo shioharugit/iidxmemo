@@ -21,6 +21,12 @@
                         <a class="dropdown-item" href="{{ route('admin.user.create') }}">登録</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">メモ</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('admin.memo.create') }}">登録</a>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0);" onclick="if (confirm('ログアウトしますか?')) {location.href = '{{ route('admin.logout') }}'; }return false;">ログアウト</a>
                 </li>

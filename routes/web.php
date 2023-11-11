@@ -62,8 +62,6 @@ Route::namespace('User')->prefix('user')->name('user.')->group(function () {
             Route::post('store/{music_id}', 'MemoController@store')->name('store');
             // Ajax メモ更新
             Route::post('update/{memo_id}', 'MemoController@update')->name('update');
-            // Ajax メモ削除
-            Route::post('destroy/{memo_id}', 'MemoController@destroy')->name('destroy');
         });
 
         // ユーザー更新
@@ -133,6 +131,13 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
             // 削除
             Route::post('destroy/{user_id}', 'UserController@destroy')->name('destroy');
+        });
+
+        // メモ
+        Route::prefix('memo')->name('memo.')->group(function () {
+            // 登録
+            Route::get('create', 'MemoController@create')->name('create');
+            Route::post('store', 'MemoController@store')->name('store');
         });
     });
 
