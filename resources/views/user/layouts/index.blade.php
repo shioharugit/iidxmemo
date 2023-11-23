@@ -11,7 +11,7 @@
     <meta property="og:description" content="beatmania IIDXのACに収録されている楽曲のメモを気軽に行えるサービスです。クリアできそうな曲、好きな曲などなど、様々な用途でメモをしたくなったときにご利用ください。">
     <meta property="og:url" content="https://iidxmemo.official.jp/public/">
     <meta property="og:site_name" content="IIDXMEMO">
-    <meta property="og:image" content="{{asset('/images/home/ogp.jpg')}}">
+    <meta property="og:image" content="{{asset('/images/home/ogp.jpg')}}?20231123">
     <link rel="icon" href="{{asset('favicon.ico')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
     <link href="{{asset('css/common.css')}}" rel="stylesheet" media="screen">
