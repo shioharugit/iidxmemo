@@ -47,6 +47,7 @@ return [
         29 => 'CastHour',
         30 => 'RESIDENT',
         31 => 'EPOLIS',
+        32 => 'Pinky Crush',
     ],
 
     // SP難易度
