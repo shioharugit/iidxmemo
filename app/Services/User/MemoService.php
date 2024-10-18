@@ -29,6 +29,7 @@ class MemoService
             'search_dp_difficulty' => $request->search_dp_difficulty,
             'search_free' => $request->search_free,
             'deleted_at_is_null' => true,
+            'musics_deleted_at_is_null' => true,
             'order_by' => [
                 'column' => 'musics.title',
                 'sort' => 'ASC',
@@ -102,6 +103,7 @@ class MemoService
             'user_id' => Auth::user()->id,
             'memo_id' => $memo_id,
             'deleted_at_is_null' => true,
+            'musics_deleted_at_is_null' => true,
         ];
 
         return $this->memo->getMemo($params)->first();

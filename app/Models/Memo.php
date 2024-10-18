@@ -61,6 +61,10 @@ class Memo extends Model
             $query->whereNull('memos.deleted_at');
         }
 
+        if (!empty($params['musics_deleted_at_is_null'])) {
+            $query->whereNull('musics.deleted_at');
+        }
+
         if (!empty($params['version']) && is_array($params['version'])) {
             $query->whereIn('musics.version', $params['version']);
         }
