@@ -305,10 +305,10 @@
                     // 検索結果の表示
                     let html = '';
                     $.each(response, function (index, value) {
-                        html += '<tr>';
-                        html += '<td class="pointer" onclick="getEditMemo(' + value.memo_id + ');">';
+                        html += '<tr class="music-area">';
+                        html += '<td class="pointer music-name" onclick="getEditMemo(' + value.memo_id + ');">';
                         if (value.check_flag === 1) {
-                            html += '<i class="fa-solid fa-flag mr-2"></i>';
+                            html += '<i class="fa-solid fa-flag mr-2 flag"></i>';
                         }
                         html += value.title;
                         html += '<input type="hidden" id="registered_music_id_' + value.music_id + '" value="' + value.music_id + '">';
