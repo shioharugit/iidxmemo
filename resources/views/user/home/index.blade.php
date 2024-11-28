@@ -36,8 +36,8 @@
                 <div class="card">
                     <div class="card-header bg-light h5"><h3>メモ一覧</h3></div>
                     <div class="card-body">
-                        <a href="{{asset('/images/home/main1.png')}}?20231123" target="_blank" rel="noopener noreferrer">
-                            <img src="{{asset('/images/home/thumb1.png')}}?20231123" class="img-fluid img-thumbnail" alt="メモ一覧参考画像">
+                        <a href="{{asset('/images/home/main1.png')}}?20241128" target="_blank" rel="noopener noreferrer">
+                            <img src="{{asset('/images/home/thumb1.png')}}?20241128" class="img-fluid img-thumbnail" alt="メモ一覧参考画像">
                         </a>
                         <p class="card-text mt-4">AC収録楽曲を一覧できます。</p>
                     </div>
@@ -45,7 +45,7 @@
                 <div class="card">
                     <div class="card-header bg-light h5"><h3>絞り込み</h3></div>
                     <div class="card-body">
-                        <a href="{{asset('/images/home/main2.png')}}?20231123" target="_blank" rel="noopener noreferrer">
+                        <a href="{{asset('/images/home/main2.png')}}?20241128" target="_blank" rel="noopener noreferrer">
                             <img src="{{asset('/images/home/thumb2.png')}}?20231123" class="img-fluid img-thumbnail" alt="楽曲絞り込み参考画像">
                         </a>
                         <p class="card-text mt-4">楽曲をバージョン、SP・DP難易度、メモの有無、フラグの有無、フリーワードで絞り込みできます。</p>
@@ -65,8 +65,8 @@
                 <div class="card">
                     <div class="card-header bg-light h5"><h4>フリーワード検索例</h4></div>
                     <div class="card-body">
-                        <a href="{{asset('/images/home/main4.png')}}?20231123" target="_blank" rel="noopener noreferrer">
-                            <img src="{{asset('/images/home/thumb4.png')}}?20231123" class="img-fluid img-thumbnail" alt="フリーワード検索例参考画像">
+                        <a href="{{asset('/images/home/main4.png')}}?20241128" target="_blank" rel="noopener noreferrer">
+                            <img src="{{asset('/images/home/thumb4.png')}}?20241128" class="img-fluid img-thumbnail" alt="フリーワード検索例参考画像">
                         </a>
                         <p class="card-text mt-4">俗称でもある程度検索できます。</p>
                     </div>
