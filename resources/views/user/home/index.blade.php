@@ -1,14 +1,14 @@
 @extends('user.layouts.index')
-@section('title', 'IIDEXMEMO')
+@section('title', 'IIDXMEMO')
 @section('content')
     <div aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">HOME</li>
+            <li class="breadcrumb-item active" aria-current="page" tabindex="0">HOME</li>
         </ol>
     </div>
 
-    <div class="card mt-4">
-        <div class="card-header"><h2>IIDXMEMOとは？</h2></div>
+    <div class="card mt-4" tabindex="0">
+        <div class="card-header"><h2 aria-label="ツーディーエックスメモとは">IIDXMEMOとは？</h2></div>
         <div class="card-body">
             <p>beatmania IIDXのACに収録されている楽曲のメモを気軽に行えるサービスです。管理人がARENAモードで「この曲どうやるんだっけ…」ってならないようにすぐに検索できる目的で作成しました。他には、</p>
             <ul>
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="card mt-4">
+    <div class="card mt-4" tabindex="0">
         <div class="card-header"><h2>機能紹介</h2></div>
         <div class="card-body">
             <div class="card-deck">
@@ -75,7 +75,7 @@
         </div>
     </div>
 
-    <div class="card mt-4">
+    <div class="card mt-4" tabindex="0">
         <div class="card-header"><h2>利用規約</h2></div>
         <div class="card-body">
             <h3>１．サービスのご利用</h3>
@@ -98,7 +98,7 @@
         </div>
     </div>
 
-    <div class="card mt-4">
+    <div class="card mt-4" tabindex="0">
         <div class="card-header"><h2>その他</h2></div>
         <div class="card-body">
             <p>不具合報告・お問い合わせはTwitterまでお願いします。</p>
