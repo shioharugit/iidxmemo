@@ -48,6 +48,7 @@ return [
         30 => 'RESIDENT',
         31 => 'EPOLIS',
         32 => 'Pinky Crush',
+        33 => 'Sparkle Shower',
     ],
 
     // SP難易度
