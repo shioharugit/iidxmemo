@@ -11,6 +11,12 @@
     </ol>
 </nav>
 
+<script>
+
+</script>
+
+
+
 <div class="card">
     <h5 class="card-header">{{$title}}</h5>
     <div class="card-body">
@@ -20,6 +26,15 @@
                     {{ session('status') }}
                 </div>
             @endif
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="convert">入力補助</label>
+                    <textarea class="form-control" id="input"></textarea>
+                    <button id="convert" class="mt-3 btn btn-primary">入力</button>
+                </div>
+            </div>
+
             <form action="" method="POST" id="input_form">
                 @csrf
 
@@ -199,4 +214,43 @@
             }
         }
     @endif
+
+    $('#convert').on('click', function() {
+        let text = $('#input').val();
+
+        // 改行を除去
+        text = text.replace(/\r?\n/g, '');
+
+        // タブ区切りで分割
+        let parts = text.split('\t');
+
+        // 除去対象のタグ
+        const removeTags = /\[(MSS|HCN|BSS|CN|MSS\?|HCN\?|BSS\?|CN\?)\]/g;
+
+        let arr = parts.map(item => {
+            item = item.trim();
+
+            // 指定タグを削除
+            item = item.replace(removeTags, '');
+
+            // "-" のみなら空文字にする
+            if (item === '-') return '';
+
+            return item;
+        });
+
+        $('#sp_beginner').val(arr[0]);
+        $('#sp_normal').val(arr[1]);
+        $('#sp_hyper').val(arr[2]);
+        $('#sp_another').val(arr[3]);
+        $('#sp_leggendaria').val(arr[4]);
+        $('#dp_normal').val(arr[5]);
+        $('#dp_hyper').val(arr[6]);
+        $('#dp_another').val(arr[7]);
+        $('#dp_leggendaria').val(arr[8]);
+        $('#bpm').val(arr[9]);
+        $('#genre').val(arr[10]);
+        $('#title').val(arr[11]);
+        $('#artist').val(arr[12]);
+    });
 </script>
